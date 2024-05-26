@@ -165,7 +165,7 @@ span {
   cursor: pointer;
 }
 
-#ulCounterDiv {
+#counterDiv {
   display: none;
   position: relative;
   right: 5em;

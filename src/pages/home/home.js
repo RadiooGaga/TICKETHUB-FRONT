@@ -220,20 +220,19 @@ export const printDetails = (event, div) => {
       const counterImg = document.createElement('img');
       counterImg.src = '/assets/pics/abajo.png';
       counterImg.id = "counterImg";
-      const ulCounterDiv = document.createElement('div');
-      ulCounterDiv.id = "ulCounterDiv";
-      const ulCounter = document.createElement('ul');
-      ulCounter.id = "desplegarParticipantes";
+      const counterDiv = document.createElement('div');
+      counterDiv.id = "counterDiv";
+      const participantsCounter = document.createElement('ul');
+      participantsCounter.id = "desplegarParticipantes";
       
+      // Botón para mostrar los asistentes
       counter.addEventListener('click', (e) => {
-        const ulDisplay = document.querySelector('#ulCounterDiv');
+      const ulDisplay = document.querySelector('#counterDiv');
         if (ulDisplay.style.display === "none" || ulDisplay.style.display === "") {
           ulDisplay.style.display = "flex";
         } else {
             ulDisplay.style.display = "none";
         }
-        
-       
       })
       
       editAdminButton.addEventListener('click', (e) => {
@@ -253,8 +252,8 @@ export const printDetails = (event, div) => {
       divBottomDetails.appendChild(divCounter);
       divCounter.appendChild(counter);
       counter.appendChild(counterImg);
-      counter.appendChild(ulCounterDiv);
-      ulCounterDiv.appendChild(ulCounter);
+      counter.appendChild(counterDiv);
+      counterDiv.appendChild(participantsCounter);
       divBottomDetails.appendChild(editAdminButton);
       divBottomDetails.appendChild(deleteAdminButton);
     } 

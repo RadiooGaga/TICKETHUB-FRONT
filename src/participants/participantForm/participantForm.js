@@ -52,18 +52,17 @@ const ParticipantForm = (eventId) => {
     participantForm.appendChild(participantEmail);
     participantForm.appendChild(buttonSend);
    
-    let participants = [];
+
 
     //BOTON FORMULARIO REGISTRO DEL PARTICIPANTE
     participantForm.addEventListener('submit', (e)=> {
+        e.preventDefault()
         submitParticipantReg(
         participantName.value, 
         participantSurname.value, 
         participantEmail.value, 
         eventId, 
         participantForm)  
-      
-        participants.push(eventId);
         console.log("Participante registrado");
     })
 }
