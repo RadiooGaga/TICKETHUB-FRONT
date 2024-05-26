@@ -1,0 +1,119 @@
+
+/* FORMULARIOS DE LOGUEO */
+
+#divLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 10px;
+    opacity: 85%;
+    top: 45%;
+    left: 50%;
+    gap: 30px;
+    transform: translate(-50%, -50%);
+}
+
+#loginForm {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+    gap: 30px;
+}
+
+.registrarseDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%
+}
+
+.newUserSpan {
+    width: auto;
+    font-size: 14px;
+    padding-right: 8px;
+}
+
+#registrateAqui {
+    width: auto;
+    font-size: 16px;
+    color: green;
+}
+
+#registrateAqui:hover {
+    cursor: pointer;
+}
+
+.inputUN, .inputUE , .inputPass {
+    width: 50%;
+    height: 40px;
+    border-style: none;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+
+#buttonLog {
+    width: 9em;
+    height: 30px;
+    font-size: 20px;
+    border-style: none;
+    border-radius: 5px;
+    background-color: rgb(244, 159, 128);
+    color: white;
+}
+
+#buttonReg:hover, #buttonLog:hover {
+    cursor: pointer;
+}
+
+#loginH2 {
+    font-size: 32px;
+    font-family: 'jersey25';
+    color: whitesmoke;
+}
+
+
+
+
+
+@media screen and (max-width: 480px) {
+
+    #divLogin {
+        gap: 18px;
+    }
+
+    #loginForm {
+        gap: 18px;
+    }
+
+    .newUserSpan {
+        font-size: 13px;
+    }
+
+    #registrateAqui {
+        font-size: 14px; 
+    }
+
+    .inputUN, .inputUE , .inputPass {
+        width: 45%;
+        height: 30px;
+        border-radius: 3px;
+    }
+
+    #buttonLog {
+        width: 5em;
+        height: 25px;
+        font-size: 16px;
+    }
+
+    #loginH2 {
+        font-size: 25px;
+    }
+        
+}
