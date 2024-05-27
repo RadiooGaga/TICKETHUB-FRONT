@@ -201,7 +201,8 @@ export const printDetails = (event, div) => {
     divDetails.appendChild(aCategory);
     divDetails.appendChild(description); 
 
-    /* Si hay usuario admin, se habilitan los botones para editar o borrar cualquier evento */
+    /* Si hay usuario admin, se habilitan los botones para editar o borrar cualquier evento y
+    que se vean los participantes apuntados. */
     if (user && user.rol === 'admin') {
     
       const divBottomDetails = document.createElement('div');
@@ -224,16 +225,34 @@ export const printDetails = (event, div) => {
       counterDiv.id = "counterDiv";
       const participantsCounter = document.createElement('ul');
       participantsCounter.id = "desplegarParticipantes";
-      
-      // Botón para mostrar los asistentes
-      counter.addEventListener('click', (e) => {
-      const ulDisplay = document.querySelector('#counterDiv');
+
+      //BOTÓN PARA MOSTRAR ASISTENTES
+      counter.addEventListener('click', async (e) => {
+        const ulDisplay = document.querySelector('#counterDiv');
+    
         if (ulDisplay.style.display === "none" || ulDisplay.style.display === "") {
-          ulDisplay.style.display = "flex";
+          try {
+            const response = await fetch(`http://localhost:3004/api/participants/event/${event._id}`);
+            if (!response.ok) {
+              throw new Error('Error en la respuesta del servidor');
+            }
+            const participants = await response.json();
+            participantsCounter.innerHTML = '';
+    
+            for (const participant of participants.Asistentes) {
+              const li = document.createElement('li');
+              li.textContent = participant;
+              participantsCounter.appendChild(li); 
+            }
+            ulDisplay.style.display = "flex";
+
+          } catch (error) {
+            console.error('Error al obtener los participantes:', error);
+          }
         } else {
-            ulDisplay.style.display = "none";
+          ulDisplay.style.display = "none";
         }
-      })
+      });
       
       editAdminButton.addEventListener('click', (e) => {
         window.scrollTo({
@@ -262,10 +281,12 @@ export const printDetails = (event, div) => {
 }  
 
 
+
 // Función para añadir evento desde el joinButton y almacenarlo en localstorage.
 export const addEvent = async (event) => {
 
   const user = JSON.parse(localStorage.getItem('user'));
+  
   const objetoFinal = JSON.stringify({
     myEvents: event
   });
