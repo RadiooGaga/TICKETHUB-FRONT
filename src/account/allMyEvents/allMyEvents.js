@@ -12,16 +12,16 @@ export const allMyEvents = async () => {
   const res = await fetch(`http://localhost:3004/api/user/${user._id}`);
   const usuario = await res.json();
 
-  let myEvents = []; // *
+  let myEvents = []; 
 
   // aviso si no hay eventos añadidos
-  if (!usuario.myEvents || usuario.myEvents.length === 0) {
+  if (usuario.myEvents.length === 0) {
     noEventsAdded(divAllEvents)
     } else {
       for (const idEvent of usuario.myEvents) {
         const response = await fetch(`http://localhost:3004/api/events/${idEvent}`);
         const evento = await response.json();
-        myEvents.push(evento) // si hay, se meten en *
+        myEvents.push(evento) 
       }
   }
   printMyEvents(myEvents, divAllEvents);
@@ -33,7 +33,6 @@ export const printMyEvents = (events, divPadre) => {
 
   const section = document.querySelector('#principal')
 
-  let eventCounter = 0;
 
   for (const event of events) {
    
@@ -61,9 +60,9 @@ export const printMyEvents = (events, divPadre) => {
       description.textContent = event.description;
       joinButton.textContent = "ASISTIR";
       joinButton.className = "joinButton";
-      joinButton.id = `btn${eventCounter}`;
-      eventCounter++;
-
+      joinButton.id = `btn${event._id}`;
+    
+     
       divPadre.appendChild(divCardEvent);
       divCardEvent.appendChild(divDetailImg);
       divDetailImg.appendChild(img);
@@ -83,23 +82,24 @@ export const printMyEvents = (events, divPadre) => {
         joinButton.style.backgroundColor = "#b0a658";
       } 
 
+         // Añadir el evento de clic al botón
       joinButton.addEventListener('click', (e) => {
-        const removeCard = removeEvent(event._id);
+        const removeCard = removeEvent(event._id, divCardEvent);
         console.log(removeCard, "evento quitado");
-        if (user.myEvents.length === 0 || removeCard === false) {
+          if (!removeCard) {
           const allEvents = document.querySelector('#divAllEvents');
           noEventsAdded(allEvents);
-        }
-       
-      })
+          }
+          
+      });
   }
   section.appendChild(divPadre);
 }
 
 
 
-//RETIRAR EL EVENTO DE "TODOS MIS EVENTOS"
-const removeEvent = async (event) => {
+///RETIRAR EL EVENTO DE "TODOS MIS EVENTOS"
+const removeEvent = async (event, divCard) => {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const objetoFinal = JSON.stringify({
@@ -115,15 +115,14 @@ const removeEvent = async (event) => {
     body: objetoFinal
   };
 
-  // Verificar si el evento ya está en user.myEvents. Si hay, borrarlo.
+  // Si el evento ya existe en user.myEvents, se borra.
   let removeCard;
-  const eventCard = document.querySelector('#divCardDetail');
+
   const index = user.myEvents.indexOf(event); 
   if (index !== -1) {
       user.myEvents.splice(index, 1);
-      eventCard.remove();//si "Mis eventos" no está vacío, se elimina el evento del DOM
+      divCard.remove();//si "Mis eventos" no está vacío, elimino el evento del DOM
       removeCard = true;
-    
       console.log('Se eliminó el evento de "Mis eventos"', event);
   } else {
       removeCard = false;
@@ -131,7 +130,6 @@ const removeEvent = async (event) => {
   }
   
    const res = await fetch(`http://localhost:3004/api/user/update-user/${user._id}`, options);
-
    const respuesta = await res.json();
    console.log(respuesta);
 

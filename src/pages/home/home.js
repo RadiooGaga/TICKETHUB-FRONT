@@ -1,4 +1,3 @@
-import { allMyEvents } from '../../account/allMyEvents/allMyEvents';
 import { participantRegister } from '../../participants/participantForm/participantForm';
 import { updateForm } from '../../account/eventsCreated/eventsCreated';
 import { warning } from '../../account/eventsCreated/eventsCreated';
@@ -36,7 +35,6 @@ export const Home = async () => {
 //Función pintar los eventos de Home.
 export const printEvents = (events, divPadre) => {
   
-  let eventCounter = 0;
 
   for (const event of events) {
 
@@ -116,14 +114,13 @@ export const printEvents = (events, divPadre) => {
       const joinButton = document.createElement('button');
       joinButton.textContent = "ASISTIR";
       joinButton.className = "joinButton";
-      joinButton.id = `btn${eventCounter}`;
-      eventCounter++;
+      joinButton.id = `btn${event._id}`;
+      
       divBlueRedButtons.appendChild(joinButton);
         
 
       //BOTÓN DE ASISTIR SI TIENES CUENTA (USER)
       joinButton.addEventListener("click", (e) => {
-      console.log(`hay ${eventCounter++} eventos en la web`);
         const changeButton = addEvent(event._id)
         .then(changeButton => {
           if (changeButton === true) {
@@ -133,7 +130,6 @@ export const printEvents = (events, divPadre) => {
             joinButton.style.backgroundColor = "#9c4c46";
             joinButton.textContent = "ASISTIR";
           }
-          allMyEvents();
         });
         console.log(changeButton)
       }) 
@@ -309,6 +305,7 @@ export const addEvent = async (event) => {
    console.log('Se añadió el event a Mis eventos', event);
  } else {
    const eventIndex = user.myEvents.indexOf(event); // Si hay, elimino.
+   console.log(eventIndex)
    user.myEvents.splice(eventIndex, 1);
    changeButton = false;
    console.log('Se eliminó el evento de Mis eventos', event);
