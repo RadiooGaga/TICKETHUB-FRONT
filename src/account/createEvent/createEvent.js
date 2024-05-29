@@ -62,6 +62,7 @@ export const eventForm = async () => {
     // EVENTO DE CAMBIO DE CATEGORÍA.
     categorySelector.addEventListener('change', function() {
     selectedCategoryId = this.value; //value seleccionado
+    console.log(this)
     });
 
     const buttonCreateEvent = document.createElement('a');
@@ -86,7 +87,7 @@ export const eventForm = async () => {
     fileInputId.addEventListener('change', (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = (e) => { // lee el contenido de archivos almacenados en el cliente
         const contenido = e.target.result; // La imagen se cargará como una URL
         imgContent = contenido;
     };
