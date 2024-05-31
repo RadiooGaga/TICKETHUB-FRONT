@@ -27,16 +27,19 @@ const Login = (parentNode) => {
     const aRegNewUser = document.createElement('a');
     aRegNewUser.textContent = "Regístrate";
     aRegNewUser.id = "registrateAqui";
+
     const loginForm = document.createElement("form");
     loginForm.id = "loginForm";
     const inputUserName = document.createElement("input");
     inputUserName.className = "inputUN";
+    inputUserName.type = "text";
     inputUserName.placeholder = "usuario";
+    inputUserName.autocomplete = "userName";
     const inputPass = document.createElement("input");
     inputPass.className = "inputPass";
     inputPass.placeholder = "*****";
     inputPass.type = "password";
-    inputPass.autocomplete = "current-password";
+    inputPass.autocomplete = "password";
     const buttonLog = document.createElement("button");
     buttonLog.id = "buttonLog";
     buttonLog.textContent = "Acceder";

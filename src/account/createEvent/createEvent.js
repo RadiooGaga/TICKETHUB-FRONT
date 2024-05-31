@@ -68,6 +68,9 @@ export const eventForm = async () => {
     const buttonCreateEvent = document.createElement('a');
     buttonCreateEvent.id = "createEventButton";
     buttonCreateEvent.textContent = "CREAR!";
+    buttonCreateEvent.type = "submit";
+    const pError = document.createElement('p');
+    pError.id = "error";
 
     section.appendChild(divEnter);
     divEnter.appendChild(enterForm);
@@ -79,6 +82,8 @@ export const eventForm = async () => {
     enterForm.appendChild(inputDescription);
     enterForm.appendChild(categorySelector);
     enterForm.appendChild(buttonCreateEvent);
+    enterForm.appendChild(pError);
+    
 
     //imagen para subir al evento
     let imgContent;
@@ -99,31 +104,27 @@ export const eventForm = async () => {
     
     //BOTÓN "CREAR EVENTO"
     buttonCreateEvent.addEventListener("click", (e) => {
-        
+        e.preventDefault();
         submitEvent(
-            inputEvent.value, 
-            inputDate.value, 
-            locationInput.value, 
-            imgContent, 
-            inputDescription.value, 
-            selectedCategoryId,
-            participants,
-            creator,
-            enterForm)
-        .then(() => {
-        // Si el envío del formulario es exitoso, redirigimos la página a "eventos creados"
-            eventsCreated();         
-            console.log("Evento subido");
-        })
-        .catch(error => {
-            console.error("Error al subir el evento:", error);
-        });
-    })
+                inputEvent.value, 
+                inputDate.value, 
+                locationInput.value, 
+                imgContent, 
+                inputDescription.value, 
+                selectedCategoryId,
+                participants,
+                creator,
+                enterForm
+            );
+            console.log("lo pilla")
+            //eventsCreated()
+    });
 }
 
 
 //FUNCIÓN SUBMIT DE "CREAR EVENTO"
 const submitEvent = async (eventName, date, location, img, description, category, participants, creator, form) => {
+
 
     const finalObject = JSON.stringify({
         eventName,
@@ -148,19 +149,37 @@ const submitEvent = async (eventName, date, location, img, description, category
 
     const res = await fetch("http://localhost:3004/api/user/new-event", fetchOptions);
 
-    if (res.ok) {
-        console.log('Evento creado!'); 
-    }
+      //si falta el nombre, la fecha, la localización...etc
+      if (!eventName || !date || !location || !img || !description || !category) {
+        const error = document.getElementById('error');
+        error.textContent = "Faltan campos por rellenar";
+        error.style = "color: rgb(244, 159, 128)";
+    
+        form.appendChild(error);
+        console.log("faltan campos")
 
-    if (res.status === 400) {
-        console.log('Error en la petición'); 
-    } 
-
+        } 
+        switch (res.status) {
+            case 400:
+                console.log("Error al crear evento");
+                break;
+            case 200:
+                console.log("Evento creado!");
+                eventsCreated();
+                break;
+            default:
+                console.log("Ocurrió un error inesperado");
+        }
+    
+        
+       
+    
     const respuestaFinal = await res.json();
     console.log(respuestaFinal)
 
     localStorage.setItem("newEvent", respuestaFinal);
     localStorage.setItem("newEvent", JSON.stringify(respuestaFinal));
+    
 }
 
 

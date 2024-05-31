@@ -362,3 +362,138 @@
     }
     
 }
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+    #divEventsCreated {
+        position: relative;
+        top: 0em;
+        padding: 10px;
+    }
+
+    #createdEventsEmpty {
+        position: absolute;
+        height: 60px;
+    }
+    
+    #eventsCreatedEmpty {
+        font-size: 11px;
+    }
+
+    #enterEventFormUpdate {
+        padding: 20px;
+        position: relative;
+        bottom: 11em;
+        height: 450px;
+    }
+
+    #inputUpdateEventId, #inputUpdateDate, #locationUpdateInput, #fileInputUpdate, #inputUpdateDescription, #selectUpdateCategories {
+        width: 280px;
+        height: 30px;
+      
+    }
+    
+    #inputUpdateDescription {
+        box-sizing: border-box;
+        resize: vertical;
+        width: 280px;
+        height: 100px;
+    }
+
+    
+    #updateEventButton, #buttonGoBack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10em;
+        height: 25px;
+        font-size: 10px;
+    }
+
+    #cardEventWithDetails {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .divImg {
+        width: 100%;
+    }
+
+    #eventsEmpty {
+        height: 60px;
+    }
+
+    #myEventsEmpty {
+        font-size: 12px;
+    }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    #divEventsCreated {
+        position: relative;
+        top: 0em;
+        padding: 10px;
+    }
+
+    #createdEventsEmpty {
+        position: absolute;
+        height: 60px;
+    }
+    
+    #eventsCreatedEmpty {
+        font-size: 11px;
+    }
+
+    #enterEventFormUpdate {
+        padding: 20px;
+        position: relative;
+        bottom: 11em;
+        height: 450px;
+    }
+
+    #inputUpdateEventId, #inputUpdateDate, #locationUpdateInput, #fileInputUpdate, #inputUpdateDescription, #selectUpdateCategories {
+        width: 280px;
+        height: 30px;
+      
+    }
+    
+    #inputUpdateDescription {
+        box-sizing: border-box;
+        resize: vertical;
+        width: 280px;
+        height: 100px;
+    }
+
+    
+    #updateEventButton, #buttonGoBack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10em;
+        height: 25px;
+        font-size: 10px;
+    }
+
+    #cardEventWithDetails {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .divImg {
+        width: 100%;
+    }
+
+    #eventsEmpty {
+        height: 60px;
+    }
+
+    #myEventsEmpty {
+        font-size: 12px;
+    }
+
+}

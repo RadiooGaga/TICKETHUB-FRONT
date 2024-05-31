@@ -51,6 +51,10 @@
     color: whitesmoke;
 }
 
+.error {
+    color: rgb(244, 159, 128)
+}
+
 
 @media screen and (max-width: 480px) {
 

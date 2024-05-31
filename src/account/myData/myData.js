@@ -1,7 +1,6 @@
 import { Account } from '../myAccount/account';
 import { warning } from '../../account/eventsCreated/eventsCreated';
 import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin';
-import { Header } from '../../components/header/header';
 import './myData.css';
 
 

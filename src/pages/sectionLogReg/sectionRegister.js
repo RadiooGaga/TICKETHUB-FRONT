@@ -1,5 +1,6 @@
 import './sectionRegister.css'; 
-import { sectionLogin } from './sectionLogin';
+import { Account } from '../../account/myAccount/account';
+import { Header } from '../../components/header/header';
 
 export const sectionRegister = () => {
     const section = document.querySelector("#principal");
@@ -34,11 +35,15 @@ export const Register = (parentNode) => {
     const pError = document.createElement('p');
     pError.id = "error";
     
+    inputUserName.placeholder = "usuario";
+    inputUserName.type = "text";
+    inputUserName.autocomplete = "username";
+    inputUserEmail.placeholder = "yourname@email.com";
+    inputUserEmail.type = "email";
+    inputUserEmail.autocomplete = "email";
+    inputPass.placeholder = "*****";
     inputPass.type = "password";
     inputPass.autocomplete = "current-password";
-    inputUserName.placeholder = "usuario";
-    inputUserEmail.placeholder = "yourname@email.com";
-    inputPass.placeholder = "*****";
     buttonReg.textContent = "Registro";
     buttonReg.type = "submit";
     
@@ -57,15 +62,13 @@ export const Register = (parentNode) => {
     registerForm.appendChild(pError);
     
     registerForm.addEventListener('submit', (e) => {
+        e.preventDefault()
         submitReg(
             inputUserName.value, 
             inputUserEmail.value, 
             inputPass.value, 
             userTypeSelect.value, 
             registerForm)
-            // Si el envío del formulario es exitoso, redirigir a la página de inicio
-            console.log("Hecho registro");
-            sectionLogin()
     })
     
 };
@@ -89,19 +92,35 @@ const submitReg = async (userName, email, password, rol, form) => {
 
     const res = await fetch("http://localhost:3004/api/auth/register", fetchOptions);
 
-    if (res.status === 400) {
+    //si falta el nombre, el mail o el pass...
+    if (!userName || !email || !password) {
         const error = document.getElementById('error');
-        error.textContent = "El usuario ya existe";
+        error.textContent = "Complete el formulario";
         error.style = "color: rgb(244, 159, 128)";
     
         form.appendChild(error);
-        return;
+        console.log("faltan datos")
     }
-
+    // si va guay
+    switch (res.status) {
+        case 200:
+            console.log("registro exitoso!");
+            Header()
+            Account()
+            break;
+        case 401: // si existe
+            console.log("El usuario ya existe");
+            break;
+        default: // else
+            console.log("Ocurrió un error inesperado");
+    }
+  
     const respuestaFinal = await res.json();
     console.log(respuestaFinal)
 
-    localStorage.setItem("newUserData", JSON.stringify(respuestaFinal.user));
+    localStorage.setItem("token", respuestaFinal.token);
+    localStorage.setItem("user", JSON.stringify(respuestaFinal.user));
+   
 
 }
 
