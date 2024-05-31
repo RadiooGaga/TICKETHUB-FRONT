@@ -75,6 +75,17 @@ export const Register = (parentNode) => {
 
 const submitReg = async (userName, email, password, rol, form) => {
 
+     //si falta el nombre, el mail o el pass...
+     if (!userName || !email || !password) {
+        const error = document.getElementById('error');
+        error.textContent = "Complete el formulario";
+        error.style = "color: rgb(244, 159, 128)";
+    
+        form.appendChild(error);
+        console.log("faltan datos")
+        return;
+    }
+
     const newUserData = JSON.stringify({
         userName,
         email,
@@ -90,37 +101,35 @@ const submitReg = async (userName, email, password, rol, form) => {
         }
     }
 
-    const res = await fetch("http://localhost:3004/api/auth/register", fetchOptions);
+    try {
+        const res = await fetch("http://localhost:3004/api/auth/register", fetchOptions);
+        const respuestaFinal = await res.json();
+        console.log(respuestaFinal)
+       
+        // si va guay
+        switch (res.status) {
+            case 200:
+                console.log("registro exitoso!");
+                localStorage.setItem("token", respuestaFinal.token);
+                localStorage.setItem("user", JSON.stringify(respuestaFinal.user));
+                Header()
+                Account()
+                return;
 
-    //si falta el nombre, el mail o el pass...
-    if (!userName || !email || !password) {
-        const error = document.getElementById('error');
-        error.textContent = "Complete el formulario";
-        error.style = "color: rgb(244, 159, 128)";
-    
-        form.appendChild(error);
-        console.log("faltan datos")
-    }
-    // si va guay
-    switch (res.status) {
-        case 200:
-            console.log("registro exitoso!");
-            Header()
-            Account()
-            break;
-        case 401: // si existe
+            case 401: // si existe
+            const error = document.getElementById('error');
+            error.textContent = "El usuario ya existe";
+            error.style.color = "lightblue";
+        
+            form.appendChild(error);
             console.log("El usuario ya existe");
-            break;
-        default: // else
-            console.log("Ocurrió un error inesperado");
+                break;
+            default: // else
+                console.log("Ocurrió un error inesperado");
+        }
+    } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
     }
-  
-    const respuestaFinal = await res.json();
-    console.log(respuestaFinal)
-
-    localStorage.setItem("token", respuestaFinal.token);
-    localStorage.setItem("user", JSON.stringify(respuestaFinal.user));
-   
 
 }
 
