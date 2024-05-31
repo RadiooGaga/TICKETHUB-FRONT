@@ -73,7 +73,7 @@
         display: flex;
         justify-content: center;
         position: relative;
-        height: 45px;
+        height: 60px;
         align-items: center;
         gap: 10px;
         padding: 10px;
@@ -88,8 +88,7 @@
 @media screen and (min-width: 769px) and (max-width: 1023px) {
 
     #divOptionUser {
-        top: 1em;
-        height: 65px;
+        top: 1.5em;
     }
 
     #buttonMisEventos, #buttonEventosCreados, #buttonCrearEvento, #buttonMisDatos {
@@ -100,6 +99,9 @@
 
 @media screen and (min-width: 1024px) and (max-width: 1443px) {
 
+    #divOptionUser {
+        top: 1.5em;
+    }
 
     #buttonMisEventos, #buttonEventosCreados, #buttonCrearEvento, #buttonMisDatos {
         width: 14%;

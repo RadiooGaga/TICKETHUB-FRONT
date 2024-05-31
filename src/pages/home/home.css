@@ -7,7 +7,6 @@
   width: 100%;
   height: auto;
   background-color: black; 
-  margin-bottom: 50px;
   padding: 40px 10px 60px;
   gap: 15px;
 }
@@ -451,17 +450,16 @@ span {
 
   #divCardDetail {
     display: flex;
-    flex-direction: column;
     padding-bottom: 20px ;
   }
 
   #divDetailImg {
-    width: 100%;
+    width: 50%;
     height: auto;
   }
 
   .divDetails {
-    width: 100%;
+    width: 50%;
     height: auto;
     padding-top: 20px;
     text-align: justify;
@@ -532,17 +530,16 @@ span {
 
   #divCardDetail {
     display: flex;
-    flex-direction: column;
     padding-bottom: 20px ;
   }
 
   #divDetailImg {
-    width: 100%;
+    width: 50%;
     height: auto;
   }
 
   .divDetails {
-    width: 100%;
+    width: 50%;
     height: auto;
     padding-top: 20px;
     text-align: justify;

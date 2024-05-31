@@ -6,7 +6,6 @@
     width: 100%;
     height: auto;
     background-color: black; 
-    margin-bottom: 50px;
     padding: 40px 10px 60px;
     gap: 15px;
 }
@@ -431,11 +430,11 @@
 
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+    
     #divEventsCreated {
-        position: relative;
-        top: 0em;
-        padding: 10px;
+        top: 1.5em;  
+        padding: 10px 10px 60px;
     }
 
     #createdEventsEmpty {
@@ -444,7 +443,7 @@
     }
     
     #eventsCreatedEmpty {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     #enterEventFormUpdate {
@@ -479,14 +478,71 @@
 
     #cardEventWithDetails {
         display: flex;
-        flex-direction: column;
         height: auto;
         padding: 10px;
     }
 
     .divImg {
-        width: 100%;
+        width: 50%;
     }
+
+    .divDetails {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    
+    #divEventsCreated {
+        top: 0em;  
+    }
+
+    #createdEventsEmpty {
+        position: absolute;
+        height: 100px;
+    }
+    
+    #eventsCreatedEmpty {
+        font-size: 14px;
+    }
+
+    #enterEventFormUpdate {
+        padding: 20px;
+        position: relative;
+        bottom: 11em;
+        height: 450px;
+    }
+
+    #inputUpdateEventId, #inputUpdateDate, #locationUpdateInput, #fileInputUpdate, #inputUpdateDescription, #selectUpdateCategories {
+        width: 280px;
+        height: 30px;
+      
+    }
+    
+    #inputUpdateDescription {
+        box-sizing: border-box;
+        resize: vertical;
+        width: 280px;
+        height: 100px;
+    }
+
+    
+    #updateEventButton, #buttonGoBack {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 10em;
+        height: 25px;
+        font-size: 10px;
+    }
+
+    #cardEventWithDetails {
+        display: flex;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
 
     #eventsEmpty {
         height: 60px;

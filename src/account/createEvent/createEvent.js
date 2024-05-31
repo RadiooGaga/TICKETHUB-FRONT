@@ -116,8 +116,6 @@ export const eventForm = async () => {
                 creator,
                 enterForm
             );
-            console.log("lo pilla")
-            //eventsCreated()
     });
 }
 
@@ -125,6 +123,16 @@ export const eventForm = async () => {
 //FUNCIÓN SUBMIT DE "CREAR EVENTO"
 const submitEvent = async (eventName, date, location, img, description, category, participants, creator, form) => {
 
+       //si falta el nombre, la fecha, la localización...etc
+       if (!eventName || !date || !location || !img || !description || !category) {
+        const error = document.getElementById('error');
+        error.textContent = "Faltan campos por rellenar";
+        error.style = "color: rgb(244, 159, 128)";
+    
+        form.appendChild(error);
+        console.log("faltan campos")
+        return;
+        } 
 
     const finalObject = JSON.stringify({
         eventName,
@@ -147,38 +155,23 @@ const submitEvent = async (eventName, date, location, img, description, category
         }
     }
 
-    const res = await fetch("http://localhost:3004/api/user/new-event", fetchOptions);
+    try {
+        const res = await fetch("http://localhost:3004/api/user/new-event", fetchOptions);
+        const respuestaFinal = await res.json();
+        console.log(respuestaFinal)
 
-      //si falta el nombre, la fecha, la localización...etc
-      if (!eventName || !date || !location || !img || !description || !category) {
-        const error = document.getElementById('error');
-        error.textContent = "Faltan campos por rellenar";
-        error.style = "color: rgb(244, 159, 128)";
-    
-        form.appendChild(error);
-        console.log("faltan campos")
-
-        } 
-        switch (res.status) {
-            case 400:
-                console.log("Error al crear evento");
-                break;
-            case 200:
-                console.log("Evento creado!");
+        if (res.status === 201) {
+            console.log("Evento creado!");
+                localStorage.setItem("newEvent", JSON.stringify(respuestaFinal));
                 eventsCreated();
-                break;
-            default:
-                console.log("Ocurrió un error inesperado");
+                return;
+        } else {
+            console.log("Error al crear evento");
         }
-    
         
-       
-    
-    const respuestaFinal = await res.json();
-    console.log(respuestaFinal)
-
-    localStorage.setItem("newEvent", respuestaFinal);
-    localStorage.setItem("newEvent", JSON.stringify(respuestaFinal));
+    } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
+    }
     
 }
 
