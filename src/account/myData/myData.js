@@ -109,7 +109,7 @@ export const deleteUser = async (user) => {
     }
 
     if (!res.ok) {
-      console.log("Error al eliminar el evento:", data);
+      console.log("Error al eliminar el usuario:", data);
     }
        
   } catch (error) {

@@ -115,13 +115,14 @@ export const eventForm = async () => {
                 participants,
                 creator,
                 enterForm
-            );
+        ); 
     });
 }
 
 
 //FUNCIÓN SUBMIT DE "CREAR EVENTO"
 const submitEvent = async (eventName, date, location, img, description, category, participants, creator, form) => {
+
 
        //si falta el nombre, la fecha, la localización...etc
        if (!eventName || !date || !location || !img || !description || !category) {
@@ -145,13 +146,15 @@ const submitEvent = async (eventName, date, location, img, description, category
         creator
     });
 
+    const token = localStorage.getItem("token"); 
     console.log(creator, "id del creador")
 
     const fetchOptions = {
         method: "POST",
         body: finalObject,
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
         }
     }
 

@@ -75,7 +75,6 @@ const submit = async  (userName,  password,  form) => {
     const objetoFinal = JSON.stringify({
         userName,
         password
-   
     });
 
     const opciones = {

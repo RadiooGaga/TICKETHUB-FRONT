@@ -302,12 +302,14 @@ export const updateForm = (event, parentDiv) => {
 const updateEvent = async (id, event) => {
   
   const finalObject = JSON.stringify(event);
+  const token = localStorage.getItem("token");
 
   const fetchOptions = {
     method: "PUT",
     body: finalObject,
     headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+         "Authorization": `Bearer ${token}`
     }
   }
   

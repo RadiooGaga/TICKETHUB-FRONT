@@ -22,7 +22,7 @@ export const Home = async () => {
     });
   })
 
-  const res = await fetch('http://localhost:3004/api/user/events');
+  const res = await fetch('http://localhost:3004/api/events');
   const events = await res.json();
 
   section.appendChild(divEvents);

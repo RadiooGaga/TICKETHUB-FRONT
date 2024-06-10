@@ -77,7 +77,7 @@ Eventos por su ID
 
 Todos los eventos
 
-- **URL** `http://localhost:3004/api/user/events`
+- **URL** `http://localhost:3004/api/events`
 
 Todos los usuarios
 
