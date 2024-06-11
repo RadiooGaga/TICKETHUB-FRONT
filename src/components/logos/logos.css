@@ -1,0 +1,96 @@
+
+.logos {
+    display: flex;
+    padding: 0 20px;
+    width: 20%;
+    justify-content: start;
+    align-items: center;
+}
+
+#logo1 {
+    width: 80px;
+}
+
+#logo1:hover {
+   cursor: pointer;
+}
+
+.logo2 {
+    width: 170px;
+}
+
+
+@media screen and (max-width: 480px) {
+
+    .logos {
+        display: flex;
+        flex-direction: column;
+        width: 18%;
+    }
+
+    #logo1 {
+        width: 50px;
+    }
+
+    .logo2 {
+        width: 60px;
+    }
+
+}
+
+
+@media screen and (min-width: 481px) and (max-width:768px){
+
+    .logos {
+        display: flex;
+        width: 35%;
+        padding: 0;
+        margin: 0;
+    }
+
+    #logo1 {
+        width: 50px;
+    }
+
+    .logo2 {
+        width: 120px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px){
+
+    .logos {
+        display: flex;
+        width: 15%;
+        padding-left: 40px;
+        margin: 0;
+    }
+
+    #logo1 {
+        width: 70px;
+    }
+
+    .logo2 {
+        width:150px;
+    }
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1443px){
+
+    .logos {
+        display: flex;
+        width: 45%;
+        padding-left: 40px;
+        margin: 0;
+    }
+
+    #logo1 {
+        width: 80px;
+    }
+
+    .logo2 {
+        width:190px;
+    }
+
+}

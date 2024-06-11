@@ -1,0 +1,165 @@
+
+#lupita {
+    width: 40px;
+    background-color: transparent;
+    border: none;
+}
+
+#lupita:hover {
+    cursor: pointer;
+}
+
+#search {
+    display: flex;
+    height: auto;
+    justify-content: center;
+    width: 18%;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+  
+#inputBuscar {
+    width: 80%;
+    background-color: #4a6a82;
+    border-style: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#inputBuscar::placeholder {
+    color: white;
+}
+
+#inputBuscar:focus::placeholder  {
+    color: transparent;
+}
+
+#inputBuscar {
+    color: white;
+}
+
+#noResults {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 130px;
+    background-color: black;
+}
+
+#noResultsParagraph {
+    color:whitesmoke;
+    font-size: 20px;
+}
+
+
+
+@media screen and (max-width: 480px) {
+
+    #lupita {
+        width: 25px;
+    }
+
+    .searchForm {
+        gap: 10px;
+    }
+
+    #search {
+        width: 50%;
+    }
+    
+    #inputBuscar {
+        width: 70%;
+        height: 30px;
+        padding-left: 8px;
+        font-size: 10px;
+    }
+
+    #noResults {
+        height: 50px;
+        background-color: black;
+    }
+
+    #noResultsParagraph {
+        font-size: 12px;
+    }
+
+}
+
+
+@media screen and (min-width: 481px) and (max-width:768px){
+
+    #lupita {
+        width: 28px;
+    }
+
+    .searchForm {
+        gap: 10px;
+    }
+
+    #search {
+        width: 50%;
+    }
+    
+    #inputBuscar {
+        width: 70%;
+        height: 30px;
+        padding-left: 8px;
+        font-size: 10px;
+    }
+
+    #noResults {
+        height: 50px;
+        background-color: black;
+    }
+
+    #noResultsParagraph {
+        font-size: 12px;
+    }
+
+}
+
+
+@media screen and (min-width: 769px) and (max-width: 1023px){
+
+    #lupita {
+        width: 30px;
+    }
+
+    #search {
+        width: 50%;
+    }
+    
+    #inputBuscar {
+        width: 70%;
+        height: 25px;
+        font-size: 10px;
+    }
+
+}
+
+
+@media screen and (min-width: 1024px) and (max-width: 1443px){
+
+    #lupita {
+        width: 35px;
+    }
+
+    #search {
+        width: 50%;
+    }
+    
+    #inputBuscar {
+        width: 70%;
+        height: 35px;
+        font-size: 10px;
+    }
+
+}

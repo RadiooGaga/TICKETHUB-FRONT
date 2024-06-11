@@ -1,7 +1,27 @@
-import './errores.css';
 
-//ERROR AL CREAR EL EVENTO
+export const errorWarning = (parendiv, text, color, id = "statusMessage") => {
 
+    const existingMessage = document.getElementById(id);
+    if (existingMessage) {
+        parendiv.removeChild(existingMessage);
+    }
+
+    const errorMessage = document.createElement('p');
+    errorMessage.id = "statusMessage";
+    errorMessage.style.color = color;
+    errorMessage.textContent = text;
+
+    parendiv.appendChild(errorMessage);
+}
+
+
+
+
+
+
+
+
+/*
 export const errorCreate = (parentDiv) => {
     const eventForm = document.querySelector('#enterEventForm');
     eventForm.innerHTML = "";
@@ -32,4 +52,4 @@ export const errorUpdate = (parentDiv) => {
     divError.appendChild(pError);
 
 }
-
+*/

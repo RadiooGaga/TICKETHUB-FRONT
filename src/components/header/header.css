@@ -1,492 +1,68 @@
-
-.logos {
+header {
     display: flex;
-    padding: 0 20px;
-    width: 20%;
-    justify-content: start;
-    align-items: center;
-}
-
-#logo1 {
-    width: 80px;
-}
-
-#logo1:hover {
-   cursor: pointer;
-}
-
-.logo2 {
-    width: 170px;
-}
-
-
-#lupita {
-    width: 40px;
-    background-color: transparent;
-    border: none;
-}
-
-#lupita:hover {
-    cursor: pointer;
-}
-
-#search {
-    display: flex;
-    height: auto;
-    justify-content: center;
-    width: 18%;
-}
-
-.searchForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-  
-#inputBuscar {
-    width: 80%;
-    background-color: #4a6a82;
-    border-style: none;
-    outline: none;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-#inputBuscar::placeholder {
-    color: white;
-}
-
-#inputBuscar:focus::placeholder  {
-    color: transparent;
-}
-
-#inputBuscar {
-    color: white;
-}
-
-#divIconBurguer {
-    display: none;
-    width: 100px;
-    height: 100px;
-}
-
-#divBurguer {
-    display: none;
-}
-
-nav {
-    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
     justify-content: space-around;
-    width: 60%;
-}
-
-ul {
-    display: flex;
-    width: 100%;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    list-style: none;
-    
-}
-
-ul:hover {
-    cursor: pointer;
-}
-
-a {
-    font-family: 'jersey25';
-    letter-spacing: 1px;
-    font-size: 21px;
-    color: rgba(255, 255, 255, 0.87);
-    transition: 0.4s ease;
-}
-
-a:hover {
-    color: #9c4c46;
-}
-
-a[id="7"] {
-    display: flex;
-    justify-content: center;
-    color: #9c4c46;
-    padding: 0;
-}
-
-#noResults {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    padding: 30px 10px 20px;
     width: 100%;
-    height: 130px;
-    background-color: black;
-}
+    height: 90px;
+    background-color:black;
+  }
 
-#noResultsParagraph {
-    color:whitesmoke;
-    font-size: 20px;
-}
-
-/* -----------------------  MEDIA QUERIES --------------------------------*/
+  /* -----------------------  MEDIA QUERIES --------------------------------*/
 
 
-@media screen and (max-width: 480px) {
+  @media screen and (max-width: 480px) {
+  
+    header {
+      width: 100%;
+      height: 90px;
+      justify-content: space-between;
+      padding: 10px 20px;
+     
+    }
+  
+  }
+  
+  @media screen and (min-width: 481px) and (max-width: 768px){
+  
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 30px; 
+    }
+  }
+  
+  @media screen and (min-width: 769px) and (max-width: 1023px){
+  
+    header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 10px; 
+      height: 120px;
+    }
+  }
+  
+  @media screen and (min-width: 1024px) and (max-width: 1443px){
+  
+    header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 10px; 
+      height: 120px;
+    }
+  }
 
-    .logos {
-        display: flex;
-        flex-direction: column;
-        width: 18%;
-    }
 
-    #logo1 {
-        width: 50px;
-    }
 
-    .logo2 {
-        width: 60px;
-    }
 
-    #lupita {
-        width: 25px;
-    }
 
-    .searchForm {
-        gap: 10px;
-    }
 
-    #search {
-        width: 50%;
-    }
-    
-    #inputBuscar {
-        width: 70%;
-        height: 30px;
-        padding-left: 8px;
-        font-size: 10px;
-    }
 
-    nav {
-        display: none;
-        justify-content: space-around;
-        width: 50%;
-    }
 
-    #divIconBurguer {
-        display: flex;
-        width: 35px;
-        height: 35px;
-    }
 
-    #burguerIcon {
-        object-fit: cover;
-    }
 
-    #burguerIcon:hover {
-        cursor: pointer;
-    }
-
-    #divBurguer {
-        display: none;
-    }
-
-    #divBurguer.visible {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        top: 5.5em;
-        right: 0em;
-        position: absolute;
-        width: 80%;
-        height: 60vh;
-        background-color: whitesmoke;
-        color: black;
-    }
-
-    ul,a[id="7"] {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        text-align: end;
-        gap: 25px;
-        padding: 15px 15px 8px 0px;
-    }
-
-    a {
-        font-size: 15px;
-        color: black;
-    }
-
-    a[id="1"],  a[id="7"] {
-        color: #9c4c46;
-        padding: 0;
-    }
-
-    #noResults {
-        height: 50px;
-        background-color: black;
-    }
-
-    #noResultsParagraph {
-        font-size: 12px;
-    }
-
-}
-
-@media screen and (min-width: 481px) and (max-width:768px){
-
-    .logos {
-        display: flex;
-        width: 35%;
-        padding: 0;
-        margin: 0;
-    }
-
-    #logo1 {
-        width: 50px;
-    }
-
-    .logo2 {
-        width: 120px;
-    }
-
-    #lupita {
-        width: 28px;
-    }
-
-    .searchForm {
-        gap: 10px;
-    }
-
-    #search {
-        width: 50%;
-    }
-    
-    #inputBuscar {
-        width: 70%;
-        height: 30px;
-        padding-left: 8px;
-        font-size: 10px;
-    }
-
-    nav {
-        display: none;
-        justify-content: space-around;
-        width: 50%;
-    }
-
-    #divIconBurguer {
-        display: flex;
-        width: 35px;
-        height: 35px;
-    }
-
-    #burguerIcon {
-        object-fit: cover;
-    }
-
-    #burguerIcon:hover {
-        cursor: pointer;
-    }
-
-    #divBurguer {
-        display: none;
-    }
-
-    #divBurguer.visible {
-        display: flex;
-        flex-direction: column;
-        justify-content: start;
-        top: 5.5em;
-        right: 0em;
-        position: absolute;
-        width: 50%;
-        height: 60vh;
-        background-color: whitesmoke;
-        color: black;
-    }
-
-    ul,a[id="7"] {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        text-align: end;
-        gap: 25px;
-        padding: 25px 25px 8px 0px;
-    }
-
-    a {
-        font-size: 15px;
-        color: black;
-    }
-
-    a[id="1"],  a[id="7"] {
-        color: #9c4c46;
-        padding: 0;
-    }
-
-    #noResults {
-        height: 50px;
-        background-color: black;
-    }
-
-    #noResultsParagraph {
-        font-size: 12px;
-    }
-
-}
-
-@media screen and (min-width: 769px) and (max-width: 1023px){
-
-    .logos {
-        display: flex;
-        width: 15%;
-        padding-left: 40px;
-        margin: 0;
-    }
-
-    #logo1 {
-        width: 70px;
-    }
-
-    .logo2 {
-        width:150px;
-    }
-
-    #lupita {
-        width: 30px;
-    }
-
-    #search {
-        width: 50%;
-    }
-    
-    #inputBuscar {
-        width: 70%;
-        height: 25px;
-        font-size: 10px;
-    }
-
-    #divBurguer {
-        display: none;
-    }
-
-    nav {
-        display: flex;
-        justify-content: end;
-        width: 100%;
-        padding: 0px 40px;
-    }
-    
-    ul {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        list-style: none;
-        
-    }
-    
-    ul:hover {
-        cursor: pointer;
-    }
-    
-    a {
-        font-family: 'jersey25';
-        letter-spacing: 1px;
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.87);
-        transition: 0.4s ease;
-    }
-    
-    a:hover {
-        color: #9c4c46;
-    }
-
-    a[id="7"] {
-        display: flex;
-        justify-content: center;
-        color: #9c4c46;
-        padding: 0;
-    }
-
-}
-
-@media screen and (min-width: 1024px) and (max-width: 1443px){
-
-    .logos {
-        display: flex;
-        width: 45%;
-        padding-left: 40px;
-        margin: 0;
-    }
-
-    #logo1 {
-        width: 80px;
-    }
-
-    .logo2 {
-        width:190px;
-    }
-
-    #lupita {
-        width: 35px;
-    }
-
-    #search {
-        width: 50%;
-    }
-    
-    #inputBuscar {
-        width: 70%;
-        height: 35px;
-        font-size: 10px;
-    }
-
-    #divBurguer {
-        display: none;
-    }
-
-    nav {
-        display: flex;
-        justify-content: end;
-        width: 100%;
-        background-color: black;
-    }
-    
-    ul {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        list-style: none;
-        
-    }
-    
-    ul:hover {
-        cursor: pointer;
-    }
-    
-    a {
-        font-family: 'jersey25';
-        letter-spacing: 1px;
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.87);
-        transition: 0.4s ease;
-    }
-    
-    a:hover {
-        color: #9c4c46;
-    }
-
-    a[id="7"] {
-        display: flex;
-        justify-content: center;
-        color: #9c4c46;
-        padding: 0;
-    }
-
-}

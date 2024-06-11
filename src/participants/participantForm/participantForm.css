@@ -36,12 +36,6 @@
     color: whitesmoke;
 }
 
-#aviso {
-    width: auto;
-    font-size: 14px;
-    padding-right: 8px;
-}
-
 #participantName, #participantSurname, #participantEmail {
     width: 50%;
     height: 40px;
@@ -62,4 +56,36 @@
 
 #buttonSend:hover {
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 480px) {
+
+    #divParticipant {
+        position: absolute;
+        height: 480px;
+        gap: 18px;
+    }
+
+    #participantForm {
+        position: relative;
+        gap: 18px;
+    }
+
+    #participantName, #participantSurname, #participantEmail  {
+        width: 45%;
+        height: 30px;
+        border-radius: 3px;
+    }
+
+    #buttonSend {
+        width: 5em;
+        height: 25px;
+        font-size: 16px;
+    }
+
+    #h2Participant {
+        font-size: 25px;
+    }
+        
 }

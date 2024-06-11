@@ -1,13 +1,14 @@
 import './sectionRegister.css'; 
 import { Account } from '../../account/myAccount/account';
 import { Header } from '../../components/header/header';
+import { errorWarning } from '../../utils/errores/errores';
 
 export const sectionRegister = () => {
     const section = document.querySelector("#principal");
     section.innerHTML = "";
      
     Register(section);//dónde va a pintar el registro
-}
+};
 
 export const Register = (parentNode) => {
   
@@ -32,8 +33,6 @@ export const Register = (parentNode) => {
     optionAdmin.textContent = "admin";
     const buttonReg = document.createElement("button");
     buttonReg.id = "buttonReg";
-    const pError = document.createElement('p');
-    pError.id = "error";
     
     inputUserName.placeholder = "usuario";
     inputUserName.type = "text";
@@ -46,8 +45,7 @@ export const Register = (parentNode) => {
     inputPass.autocomplete = "current-password";
     buttonReg.textContent = "Registro";
     buttonReg.type = "submit";
-    
-    
+        
   
     parentNode.appendChild(divRegister);
     divRegister.appendChild(newReg);
@@ -59,7 +57,6 @@ export const Register = (parentNode) => {
     userTypeSelect.appendChild(optionUser);
     userTypeSelect.appendChild(optionAdmin);
     registerForm.appendChild(buttonReg);
-    registerForm.appendChild(pError);
     
     registerForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -77,11 +74,7 @@ const submitReg = async (userName, email, password, rol, form) => {
 
      //si falta el nombre, el mail o el pass...
      if (!userName || !email || !password) {
-        const error = document.getElementById('error');
-        error.textContent = "Complete el formulario";
-        error.style = "color: rgb(244, 159, 128)";
-    
-        form.appendChild(error);
+        errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
         console.log("faltan datos")
         return;
     }
@@ -117,11 +110,7 @@ const submitReg = async (userName, email, password, rol, form) => {
                 return;
 
             case 401: // si existe
-            const error = document.getElementById('error');
-            error.textContent = "El usuario ya existe";
-            error.style.color = "lightblue";
-        
-            form.appendChild(error);
+            errorWarning(form, "El usuario ya existe", "lightblue");
             console.log("El usuario ya existe");
                 break;
             default: // else
@@ -131,6 +120,6 @@ const submitReg = async (userName, email, password, rol, form) => {
         console.error("Error al enviar la solicitud:", error);
     }
 
-}
+};
 
 

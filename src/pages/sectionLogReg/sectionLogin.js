@@ -1,7 +1,9 @@
 import { sectionRegister } from './sectionRegister';
 import { Header } from '../../components/header/header';
 import { Account } from '../../account/myAccount/account';
+import { errorWarning } from '../../utils/errores/errores';
 import './sectionLogin.css'; 
+
 
 
 export const sectionLogin = () => {
@@ -43,8 +45,7 @@ const Login = (parentNode) => {
     const buttonLog = document.createElement("button");
     buttonLog.id = "buttonLog";
     buttonLog.textContent = "Acceder";
-    const pError = document.createElement('p');
-    pError.id = "error";
+
     
     parentNode.appendChild(divLogin);
     divLogin.appendChild(newLog);
@@ -55,7 +56,7 @@ const Login = (parentNode) => {
     loginForm.appendChild(inputUserName);
     loginForm.appendChild(inputPass);
     loginForm.appendChild(buttonLog);
-    loginForm.appendChild(pError);
+ 
 
     aRegNewUser.addEventListener('click', (e) => {
         sectionRegister();
@@ -64,7 +65,7 @@ const Login = (parentNode) => {
     loginForm.addEventListener("submit", (e) => {
         e.preventDefault()
         submit(inputUserName.value, inputPass.value, loginForm);
-        console.log("he hecho submit");
+        //console.log("he hecho submit");
     })
     
 }  
@@ -88,11 +89,7 @@ const submit = async  (userName,  password,  form) => {
    const res = await fetch('http://localhost:3004/api/auth/login', opciones); 
 
    if (res.status === 400) {
-        const error = document.getElementById('error');
-        error.textContent = "Usuario y/o contraseña incorrectos";
-        error.style = "color: rgb(244, 159, 128)";
-
-        form.appendChild(error);
+        errorWarning(form, "Usuario y/o contraseña incorrectos", "rgb(244, 159, 128)")
         return;
     }
 

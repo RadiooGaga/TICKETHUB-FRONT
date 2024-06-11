@@ -23,7 +23,6 @@ export const eventsCreated = async () => {
 
 
 
-
 // PINTAR LOS EVENTOS CREADOS EN "EVENTOS CREADOS"
 const printEventsCreated = (events, parentDiv) => {
   const section = document.querySelector('#principal');

@@ -1,0 +1,102 @@
+#divIconBurguer {
+    display: none;
+    width: 100px;
+    height: 100px;
+}
+
+#divBurguer {
+    display: none;
+}
+
+/* -----------------------  MEDIA QUERIES --------------------------------*/
+
+
+@media screen and (max-width: 480px) {
+
+    nav {
+        display: none;
+        justify-content: space-around;
+        width: 50%;
+    }
+
+    #divIconBurguer {
+        display: flex;
+        width: 35px;
+        height: 35px;
+    }
+
+    #burguerIcon {
+        object-fit: cover;
+    }
+
+    #burguerIcon:hover {
+        cursor: pointer;
+    }
+
+    #divBurguer {
+        display: none;
+    }
+
+    #divBurguer.visible {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        top: 5.5em;
+        right: 0em;
+        position: absolute;
+        width: 80%;
+        height: 60vh;
+        background-color: whitesmoke;
+        color: black;
+    }
+
+}
+
+
+@media screen and (min-width: 481px) and (max-width:768px){
+
+    #divIconBurguer {
+        display: flex;
+        width: 35px;
+        height: 35px;
+    }
+
+    #burguerIcon {
+        object-fit: cover;
+    }
+
+    #burguerIcon:hover {
+        cursor: pointer;
+    }
+
+    #divBurguer {
+        display: none;
+    }
+
+    #divBurguer.visible {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        top: 5.5em;
+        right: 0em;
+        position: absolute;
+        width: 50%;
+        height: 60vh;
+        background-color: whitesmoke;
+        color: black;
+    }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px){
+
+    #divBurguer {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1443px){
+    #divBurguer {
+        display: none;
+    }
+}

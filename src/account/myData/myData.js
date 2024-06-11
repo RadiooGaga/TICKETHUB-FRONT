@@ -1,5 +1,5 @@
 import { Account } from '../myAccount/account';
-import { warning } from '../../account/eventsCreated/eventsCreated';
+import { warning } from '../eventsCreated/eventsCreated';
 import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin';
 import './myData.css';
 

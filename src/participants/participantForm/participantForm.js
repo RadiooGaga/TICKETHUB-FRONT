@@ -1,5 +1,7 @@
 import './participantForm.css';
 import { Home } from '../../pages/home/home';
+import { successfulNotice} from '../../utils/success/success';
+import { errorWarning } from '../../utils/errores/errores';
 
 export const participantRegister = (eventId) => {
     const section = document.querySelector("#principal");
@@ -20,9 +22,6 @@ const ParticipantForm = (eventId) => {
     const h2Participant = document.createElement('h2');
     h2Participant.textContent = "RELLENA TUS DATOS";
     h2Participant.id = "h2Participant";
-    const spanParticipant = document.createElement('span');
-    spanParticipant.textContent = "Te mandaremos un email de confirmación";
-    spanParticipant.id = "aviso";
     const participantForm = document.createElement("form");
     participantForm.id = "participantForm";
     const participantName = document.createElement("input");
@@ -46,7 +45,6 @@ const ParticipantForm = (eventId) => {
     section.appendChild(divParticipant);
     divParticipant.appendChild(participantForm);
     participantForm.appendChild(h2Participant);
-    participantForm.appendChild(spanParticipant);
     participantForm.appendChild(participantName);
     participantForm.appendChild(participantSurname);
     participantForm.appendChild(participantEmail);
@@ -91,30 +89,25 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
 
    
     if (res.status === 200) {
-        const successMessage = document.createElement('p');
-        successMessage.style.color = "green";
-        successMessage.textContent = "Gracias! Ya tienes los detalles del evento en tu mail 😁";
-        form.appendChild(successMessage);
+        successfulNotice(form, "Gracias! Ya tienes los detalles del evento en tu mail 😁","green")
         setTimeout(() => {
             Home()
-        }, 2000);
+        }, 3000);
+
+    } else if (res.status === 409) {
+        errorWarning(form, "Ya estás inscrito en este evento", "lightblue");
+        setTimeout(() => {
+            Home()
+        }, 3000);
 
     } else if (res.status === 400) {
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = "Ya estás inscrito en este evento";
-        errorMessage.style.color = "lightblue";
-        form.appendChild(errorMessage);
-        setTimeout(() => {
-            Home()
-        }, 4000);
+        errorWarning(form, "Faltan campos por rellenar", "lightblue");
+        
     } else {
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = "Ha ocurrido un error";
-        errorMessage.style.color = "red";
-        form.appendChild(errorMessage);
+        errorWarning(form, "Ha ocurrido un error", "red");
         setTimeout(() => {
             Home()
-        }, 4000);
+        }, 3000);
     }
         
     const respuestaFinal = await res.json();
