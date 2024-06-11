@@ -4,6 +4,7 @@ import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { warningUserDeleted } from '../../components/deletedUser/deletedUser';
 import './myData.css';
+import { formData } from '../../components/forms/form';
 
 
 //Recarga de página Mis Datos.
@@ -19,7 +20,6 @@ export const myData = async () => {
     const res = await fetch(`${urlApi}/api/user/${user._id}`);
     const usuario= await res.json();
   
-  
     section.appendChild(divData);
     printMyData(usuario, divData);  
   
@@ -29,27 +29,17 @@ export const myData = async () => {
 
 const printMyData = (user, parentDiv) => {
 
- 
-    const divMyData = document.createElement('div');
-    divMyData.id = "divMyData";
-    const dataForm = document.createElement('form');
-    dataForm.id = 'dataForm';
-    const h3MyData = document.createElement('h3');
-    h3MyData.className = "h3MyData";
-    h3MyData.textContent = "MIS DATOS";
-    const pUserName = document.createElement("input");
-    pUserName.id = "pUserName";
-    pUserName.placeholder = user.userName;
-    pUserName.type = "text";
-    const pUserEmail = document.createElement('input');
-    pUserEmail.id = "pUserEmail";
-    pUserEmail.placeholder = user.email;
-    pUserEmail.type = "email";
-    const pPass = document.createElement("input");
-    pPass.id = "pPass";
-    pPass.placeholder = "Tu contraseña";
-    pPass.type = "text";
-   
+  const divMyData = document.createElement('div');
+  divMyData.id = "divMyData";
+
+  const fields = [
+    { id: "pUserName", name: "nombre", placeholder: user.userName, type: "text" },
+    { id: "pUserEmail", name: "email", placeholder: user.email, type: "email" },
+    { id: "pPass", name: "contraseña", placeholder: "Tu contraseña", type: "password" }
+  ];
+
+    const misDatos = formData( divMyData, "h3MyData", "MIS DATOS", fields);
+
     const divButtonsData = document.createElement('div');
     divButtonsData.id = 'divButtonsData';
     const buttonDeleteAccount = document.createElement("button");
@@ -59,18 +49,13 @@ const printMyData = (user, parentDiv) => {
     buttonDeleteAccount.addEventListener('click', (e) => {
       const texto = "¿SEGURO QUE DESEA ELIMINAR SU CUENTA?";
       warning(divMyData, deleteUser, user, texto);
-    })
-   
+    })  
 
     parentDiv.appendChild(divMyData);
-    divMyData.appendChild(dataForm);
-    dataForm.appendChild(h3MyData);
-    dataForm.appendChild(pUserName);
-    dataForm.appendChild(pUserEmail);
-    dataForm.appendChild(pPass);
+    divMyData.appendChild(misDatos);
     divMyData.appendChild(divButtonsData);
     divButtonsData.appendChild(buttonDeleteAccount);
-    
+
 }
 
 

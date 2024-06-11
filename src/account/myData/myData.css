@@ -36,9 +36,8 @@
 }
 
 
-.h3MyData {
+#h3MyData {
     display: flex;
-    flex-direction: column;
     text-align: start;
     font-size: 25px;
     color: white;
@@ -104,7 +103,7 @@
         border-radius: 0px;
     }
 
-    .h3MyData {
+    #h3MyData {
         display: flex;
         align-items: center;
         font-size: 16px;
@@ -147,7 +146,7 @@
         border-radius: 0px;
     }
 
-    .h3MyData {
+    #h3MyData {
         display: flex;
         align-items: center;
         font-size: 16px;
