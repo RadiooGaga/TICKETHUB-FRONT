@@ -2,6 +2,7 @@ import './participantForm.css';
 import { Home } from '../../pages/home/home';
 import { successfulNotice} from '../../utils/success/success';
 import { errorWarning } from '../../utils/errores/errores';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
 
 export const participantRegister = (eventId) => {
     const section = document.querySelector("#principal");
@@ -85,7 +86,7 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
         }
     }
 
-    const res = await fetch("http://localhost:3004/api/participant/register", opciones);
+    const res = await fetch(`${urlApi}/api/participant/register`, opciones);
 
    
     if (res.status === 200) {
@@ -102,6 +103,12 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
 
     } else if (res.status === 400) {
         errorWarning(form, "Faltan campos por rellenar", "lightblue");
+        setTimeout(() => {
+            var errorElement = document.querySelector('#statusMessage')
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+        }, 1000);
         
     } else {
         errorWarning(form, "Ha ocurrido un error", "red");

@@ -1,6 +1,7 @@
 import './createEvent.css';
 import { Account } from '../myAccount/account';
 import { eventsCreated } from '../eventsCreated/eventsCreated';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
 
 
 
@@ -159,7 +160,7 @@ const submitEvent = async (eventName, date, location, img, description, category
     }
 
     try {
-        const res = await fetch("http://localhost:3004/api/user/new-event", fetchOptions);
+        const res = await fetch(`${urlApi}/api/user/new-event`, fetchOptions);
         const respuestaFinal = await res.json();
         console.log(respuestaFinal)
 

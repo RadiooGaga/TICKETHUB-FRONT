@@ -1,4 +1,5 @@
 import { Account } from '../myAccount/account';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
 import './allMyEvents.css';
 
 
@@ -9,7 +10,7 @@ export const allMyEvents = async () => {
   divAllEvents.id = 'divAllEvents';
   
   const user = JSON.parse(localStorage.getItem("user"));
-  const res = await fetch(`http://localhost:3004/api/user/${user._id}`);
+  const res = await fetch(`${urlApi}/api/user/${user._id}`);
   const usuario = await res.json();
 
   let myEvents = []; 
@@ -19,7 +20,7 @@ export const allMyEvents = async () => {
     noEventsAdded(divAllEvents)
     } else {
       for (const idEvent of usuario.myEvents) {
-        const response = await fetch(`http://localhost:3004/api/events/${idEvent}`);
+        const response = await fetch(`${urlApi}/api/events/${idEvent}`);
         const evento = await response.json();
         myEvents.push(evento) 
       }
@@ -129,7 +130,7 @@ const removeEvent = async (event, divCard) => {
       console.log('Nada que borrar', event);
   }
   
-   const res = await fetch(`http://localhost:3004/api/user/update-user/${user._id}`, options);
+   const res = await fetch(`${urlApi}/api/user/update-user/${user._id}`, options);
    const respuesta = await res.json();
    console.log(respuesta);
 

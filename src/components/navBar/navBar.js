@@ -1,8 +1,9 @@
 import { Home } from '../../pages/home/home';
-import { reloadPages } from '../../pages/reloadPages/reloadPages.js';
+import { reloadPages } from '../../utils/reloadPages/reloadPages.js';
 import { Account } from '../../account/myAccount/account';
 import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin.js';
 import { Header } from '../header/header.js';
+
 
 import './navBar.css';
 

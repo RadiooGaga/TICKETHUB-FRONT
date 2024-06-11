@@ -55,7 +55,7 @@ export const renderButtons = () => {
 
     const eventsPerPage = async (page) => {
         const limit = 10; 
-        const res = await fetch(`http://localhost:30004api/events?page=${page}&limit=${limit}`);
+        const res = await fetch(`${urlApi}/api/events?page=${page}&limit=${limit}`);
         const data = await res.json(); 
         const divEvents = document.querySelector('#divEvents');
         divEvents.innerHTML = ""; 

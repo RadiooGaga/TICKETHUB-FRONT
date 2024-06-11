@@ -1,5 +1,6 @@
 import { printDetails } from '../../pages/home/home';
 import { Account } from '../myAccount/account';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
 import './eventsCreated.css';
 
 
@@ -10,7 +11,7 @@ export const eventsCreated = async () => {
   divEventsCreated.id = 'divEventsCreated';
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const res = await fetch(`http://localhost:3004/api/event/creator/${user._id}`);
+  const res = await fetch(`${urlApi}/api/event/creator/${user._id}`);
   const events = await res.json();
 
       // aviso si no hay eventos creados
@@ -312,7 +313,7 @@ const updateEvent = async (id, event) => {
     }
   }
   
-  const res = await fetch(`http://localhost:3004/api/user/update-event/${id}`, fetchOptions);
+  const res = await fetch(`${urlApi}/api/user/update-event/${id}`, fetchOptions);
 
   const respuestaFinal = await res.json();
   console.log(respuestaFinal)
@@ -349,7 +350,7 @@ export const deleteEvent = async (event) => {
   };
 
   try {
-    const res = await fetch(`http://localhost:3004/api/user/delete-event/${event._id}`, options);
+    const res = await fetch(`${urlApi}/api/user/delete-event/${event._id}`, options);
     const data = await res.json();
 
     if (res.ok) {

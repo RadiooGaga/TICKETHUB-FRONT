@@ -2,6 +2,8 @@ import './sectionRegister.css';
 import { Account } from '../../account/myAccount/account';
 import { Header } from '../../components/header/header';
 import { errorWarning } from '../../utils/errores/errores';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
+
 
 export const sectionRegister = () => {
     const section = document.querySelector("#principal");
@@ -95,7 +97,7 @@ const submitReg = async (userName, email, password, rol, form) => {
     }
 
     try {
-        const res = await fetch("http://localhost:3004/api/auth/register", fetchOptions);
+        const res = await fetch(`${urlApi}/api/auth/register`, fetchOptions);
         const respuestaFinal = await res.json();
         console.log(respuestaFinal)
        

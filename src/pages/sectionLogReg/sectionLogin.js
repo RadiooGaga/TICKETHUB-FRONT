@@ -2,6 +2,7 @@ import { sectionRegister } from './sectionRegister';
 import { Header } from '../../components/header/header';
 import { Account } from '../../account/myAccount/account';
 import { errorWarning } from '../../utils/errores/errores';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
 import './sectionLogin.css'; 
 
 
@@ -86,7 +87,7 @@ const submit = async  (userName,  password,  form) => {
         }
     }
 
-   const res = await fetch('http://localhost:3004/api/auth/login', opciones); 
+   const res = await fetch(`${urlApi}/api/auth/login`, opciones); 
 
    if (res.status === 400) {
         errorWarning(form, "Usuario y/o contraseña incorrectos", "rgb(244, 159, 128)")

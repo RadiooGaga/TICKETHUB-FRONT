@@ -2,6 +2,7 @@ import { participantRegister } from '../../participants/participantForm/particip
 import { updateForm } from '../../account/eventsCreated/eventsCreated';
 import { warning } from '../../account/eventsCreated/eventsCreated';
 import { deleteEvent } from '../../account/eventsCreated/eventsCreated';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
 import './home.css';
 
 
@@ -22,7 +23,7 @@ export const Home = async () => {
     });
   })
 
-  const res = await fetch('http://localhost:3004/api/events');
+  const res = await fetch(`${urlApi}/api/events`);
   const events = await res.json();
 
   section.appendChild(divEvents);
@@ -228,7 +229,7 @@ export const printDetails = (event, div) => {
     
         if (ulDisplay.style.display === "none" || ulDisplay.style.display === "") {
           try {
-            const response = await fetch(`http://localhost:3004/api/participants/event/${event._id}`);
+            const response = await fetch(`${urlApi}/api/participants/event/${event._id}`);
             if (!response.ok) {
               throw new Error('Error en la respuesta del servidor');
             }
@@ -311,7 +312,7 @@ export const addEvent = async (event) => {
    console.log('Se eliminó el evento de Mis eventos', event);
  }
  
-  const res = await fetch(`http://localhost:3004/api/user/update-user/${user._id}`,
+  const res = await fetch(`${urlApi}/api/user/update-user/${user._id}`,
   options
   
   );

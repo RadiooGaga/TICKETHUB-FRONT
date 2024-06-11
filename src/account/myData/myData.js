@@ -1,6 +1,8 @@
 import { Account } from '../myAccount/account';
 import { warning } from '../eventsCreated/eventsCreated';
 import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin';
+import { urlApi } from '../../utils/apiUrl/apiUrl';
+import { warningUserDeleted } from '../../components/deletedUser/deletedUser';
 import './myData.css';
 
 
@@ -14,7 +16,7 @@ export const myData = async () => {
     divData.id = "divData";
 
     const user = JSON.parse(localStorage.getItem("user"));
-    const res = await fetch(`http://localhost:3004/api/user/${user._id}`);
+    const res = await fetch(`${urlApi}/api/user/${user._id}`);
     const usuario= await res.json();
   
   
@@ -84,28 +86,19 @@ export const deleteUser = async (user) => {
   };
 
   try {
-    const res = await fetch(`http://localhost:3004/api/user/delete-user/${user._id}`, options);
+    const res = await fetch(`${urlApi}/api/user/delete-user/${user._id}`, options);
     const data = await res.json();
 
     if (res.ok) {
         const myData = document.getElementById('divMyData');
         myData.remove()
-        const divData = document.getElementById('divData');
-        const divUserDeleted = document.createElement('div');
-        divUserDeleted.id = "divUserDeleted";
-        const pUserDeleted = document.createElement('p');
-        pUserDeleted.id = "pUserDeleted";
-        pUserDeleted.textContent = "USUARIO ELIMINADO";
-        console.log("Usuario eliminado");  
-
-        divData.appendChild(divUserDeleted);
-        divUserDeleted.appendChild(pUserDeleted);
-
+        warningUserDeleted()
         localStorage.clear();
+        const backToInit = document.getElementById('8');
         setTimeout(() => {
           sectionLogin()
-      }, 2000);
-        
+          backToInit.textContent = "LOGIN";
+      }, 1500);
     }
 
     if (!res.ok) {
