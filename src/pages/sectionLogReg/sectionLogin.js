@@ -4,7 +4,9 @@ import { Account } from '../../account/myAccount/account';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { formData } from '../../components/forms/form';
+import { helloByeFunc } from '../../components/saludos/saludos';
 import './sectionLogin.css'; 
+
 
 
 export const sectionLogin = () => {
@@ -62,13 +64,12 @@ const Login = (parentNode) => {
         
     
 const submit = async  (userName,  password,  form) => {
-
-     //si falta el nombre, el mail o el pass...
-     if (!userName || !password) {
-        errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
-        console.log("faltan datos")
-        return;
-    }
+        //si falta el nombre, el mail o el pass...
+        if (!userName || !password) {
+            errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
+            console.log("faltan datos")
+            return;
+        }
 
     const objetoFinal = JSON.stringify({
         userName,
@@ -83,23 +84,32 @@ const submit = async  (userName,  password,  form) => {
         }
     }
 
-   const res = await fetch(`${urlApi}/api/auth/login`, opciones); 
+    try {
+        const res = await fetch(`${urlApi}/api/auth/login`, opciones);
+        const respuestaFinal = await res.json();
+        console.log(respuestaFinal); 
 
-   if (res.status === 200) {
-    console.log("login!");
-    return;
+        switch (res.status) {
+            case 200:
+                console.log("login!");
+                localStorage.setItem("token", respuestaFinal.token);
+                localStorage.setItem("user", JSON.stringify(respuestaFinal.user));
+                const section = document.querySelector('#principal');
+                Header()
+                Account()  
+                helloByeFunc(section, "helloByeDiv", "helloByeP", `Hola ${respuestaFinal.user.userName}!`);
+                setTimeout(() => {
+                    document.getElementById("helloByeDiv").style.display = "none";
+                }, 1000);
+                return;
+            case 400:
+                errorWarning(form, "Usuario y/o contraseña incorrectos", "rgb(244, 159, 128)")
+                break;
+                default: // else
+                    console.log("Ocurrió un error inesperado");
+        }
+    } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
     }
 
-    if (res.status === 400) {
-        errorWarning(form, "Usuario y/o contraseña incorrectos", "rgb(244, 159, 128)")
-        return;
-    }
-
-    const respuestaFinal = await res.json();
-    console.log(respuestaFinal);
-
-    localStorage.setItem("token", respuestaFinal.token);
-    localStorage.setItem("user", JSON.stringify(respuestaFinal.user));
-    Header();
-    Account();
 }

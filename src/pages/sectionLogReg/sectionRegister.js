@@ -3,6 +3,7 @@ import { Header } from '../../components/header/header';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { formData } from '../../components/forms/form';
+import { helloByeFunc } from '../../components/saludos/saludos';
 import './sectionRegister.css'; 
 
 
@@ -97,8 +98,13 @@ const submitReg = async (userName, email, password, rol, form) => {
                 console.log("registro exitoso!");
                 localStorage.setItem("token", respuestaFinal.token);
                 localStorage.setItem("user", JSON.stringify(respuestaFinal.user));
+                const section = document.querySelector('#principal');
                 Header()
                 Account()
+                helloByeFunc(section, "helloByeDiv", "helloByeP", `Hola ${respuestaFinal.user.userName}!`);
+                setTimeout(() => {
+                    document.getElementById("helloByeDiv").style.display = "none";
+                }, 1000);
                 return;
 
             case 401: // si existe

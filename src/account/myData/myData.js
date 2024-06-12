@@ -2,7 +2,7 @@ import { Account } from '../myAccount/account';
 import { warning } from '../eventsCreated/eventsCreated';
 import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
-import { warningUserDeleted } from '../../components/deletedUser/deletedUser';
+import { helloByeFunc } from '../../components/saludos/saludos';
 import { formData } from '../../components/forms/form';
 import './myData.css';
 
@@ -76,15 +76,16 @@ export const deleteUser = async (user) => {
     const data = await res.json();
 
     if (res.ok) {
+      const divData = document.getElementById('divData');
         const myData = document.getElementById('divMyData');
         myData.remove()
-        warningUserDeleted()
+        helloByeFunc( divData, "helloByeDiv", "helloByeP", "USUARIO ELIMINADO")
         localStorage.clear();
         const backToInit = document.getElementById('8');
         setTimeout(() => {
           sectionLogin()
           backToInit.textContent = "LOGIN";
-      }, 1500);
+      }, 1200);
     }
 
     if (!res.ok) {
