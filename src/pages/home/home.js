@@ -91,8 +91,8 @@ export const printEvents = (events, divPadre) => {
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
-      });
-        printDetails(event, divPadre.id)
+      });  
+        printDetails(event, divPadre.id)  
       })
 
     const user = JSON.parse(localStorage.getItem("user"));
@@ -227,12 +227,19 @@ export const printDetails = (event, div) => {
       counter.addEventListener('click', async (e) => {
         const ulDisplay = document.querySelector('#counterDiv');
     
-        if (ulDisplay.style.display === "none" || ulDisplay.style.display === "") {
+        if ((ulDisplay.style.display === "none" || ulDisplay.style.display === "") && user.rol === "admin") {
           try {
-            const response = await fetch(`${urlApi}/api/participants/event/${event._id}`);
-            if (!response.ok) {
-              throw new Error('Error en la respuesta del servidor');
-            }
+            const response = await fetch(`${urlApi}/api/participants/event/${event._id}`,{
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+              }
+            });
+              if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
+              }
+
             const participants = await response.json();
             participantsCounter.innerHTML = '';
     
