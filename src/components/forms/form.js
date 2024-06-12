@@ -1,9 +1,9 @@
 
-export const formData = (parentDiv, ID, formTitle, fields) => {
+export const formData = (parentDiv, formId, ID, formTitle, fields) => {
 
     const div = document.createElement('div');
     const form = document.createElement('form');
-    form.id = 'dataForm';
+    form.id = formId;
     const h3 = document.createElement('h3');
     h3.id = ID;
     h3.textContent = formTitle;

@@ -3,8 +3,9 @@ import { warning } from '../eventsCreated/eventsCreated';
 import { sectionLogin } from '../../pages/sectionLogReg/sectionLogin';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { warningUserDeleted } from '../../components/deletedUser/deletedUser';
-import './myData.css';
 import { formData } from '../../components/forms/form';
+import './myData.css';
+
 
 
 //Recarga de página Mis Datos.
@@ -38,7 +39,7 @@ const printMyData = (user, parentDiv) => {
     { id: "pPass", name: "contraseña", placeholder: "Tu contraseña", type: "password" }
   ];
 
-    const misDatos = formData( divMyData, "h3MyData", "MIS DATOS", fields);
+    const misDatos = formData( divMyData, "dataForm", "h3MyData", "MIS DATOS", fields);
 
     const divButtonsData = document.createElement('div');
     divButtonsData.id = 'divButtonsData';

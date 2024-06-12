@@ -1,8 +1,9 @@
-import './sectionRegister.css'; 
 import { Account } from '../../account/myAccount/account';
 import { Header } from '../../components/header/header';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
+import { formData } from '../../components/forms/form';
+import './sectionRegister.css'; 
 
 
 export const sectionRegister = () => {
@@ -12,62 +13,51 @@ export const sectionRegister = () => {
     Register(section);//dónde va a pintar el registro
 };
 
+// FORMULARIO REGISTRO
 export const Register = (parentNode) => {
   
     const divRegister = document.createElement('div');
     divRegister.id = "divRegister";
-    const newReg = document.createElement('h2');
-    newReg.textContent = "REGISTRO";
-    newReg.id = "registerH2";
-    const registerForm = document.createElement("form");
-    registerForm.id = "loginForm";
-    const inputUserName = document.createElement("input");
-    inputUserName.className = "inputUN";
-    const inputUserEmail = document.createElement('input');
-    inputUserEmail.className = "inputUE";
-    const inputPass = document.createElement("input");
-    inputPass.className = "inputPass";
-    const userTypeSelect = document.createElement('select');
-    userTypeSelect.id = "typeUser";
+    const selector = document.createElement('select');
+    selector.id = "inputRol";
     const optionUser = document.createElement("option");
     optionUser.textContent = "user";
     const optionAdmin = document.createElement("option");
     optionAdmin.textContent = "admin";
+
+    const fields = [
+        { id: "inputUN", name: "nombre de usuario", placeholder: "usuario", type: "text", autocomplete: "username" },
+        { id: "inputUE", name: "email",placeholder: "email", type: "email", autocomplete: "email"  },
+        { id: "inputPass", name: "contraseña", type: "password", placeholder: "*****",  autocomplete: "current-password"}
+      ];
+ 
+    const registerData = formData(divRegister, "registerForm", "registerH2", "REGISTRO", fields )
+     
+    parentNode.appendChild(divRegister);
+    divRegister.appendChild(registerData);
+    registerData.appendChild(selector);
+    selector.appendChild(optionUser);
+    selector.appendChild(optionAdmin);
+
     const buttonReg = document.createElement("button");
     buttonReg.id = "buttonReg";
-    
-    inputUserName.placeholder = "usuario";
-    inputUserName.type = "text";
-    inputUserName.autocomplete = "username";
-    inputUserEmail.placeholder = "yourname@email.com";
-    inputUserEmail.type = "email";
-    inputUserEmail.autocomplete = "email";
-    inputPass.placeholder = "*****";
-    inputPass.type = "password";
-    inputPass.autocomplete = "current-password";
     buttonReg.textContent = "Registro";
     buttonReg.type = "submit";
-        
-  
-    parentNode.appendChild(divRegister);
-    divRegister.appendChild(newReg);
-    divRegister.appendChild(registerForm);
-    registerForm.appendChild(inputUserName);
-    registerForm.appendChild(inputUserEmail);
-    registerForm.appendChild(inputPass);
-    registerForm.appendChild(userTypeSelect);
-    userTypeSelect.appendChild(optionUser);
-    userTypeSelect.appendChild(optionAdmin);
-    registerForm.appendChild(buttonReg);
+    registerData.appendChild(buttonReg);
+
     
-    registerForm.addEventListener('submit', (e) => {
+    registerData.addEventListener('submit', (e) => {
         e.preventDefault()
+        const inputUserName = document.getElementById("inputUN").value;
+        const inputUserEmail = document.getElementById("inputUE").value;
+        const inputPass = document.getElementById("inputPass").value;
+
         submitReg(
-            inputUserName.value, 
-            inputUserEmail.value, 
-            inputPass.value, 
-            userTypeSelect.value, 
-            registerForm)
+            inputUserName, 
+            inputUserEmail, 
+            inputPass, 
+            selector.value, 
+            registerData)
     })
     
 };

@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    align-items: center;
     position: absolute;
     width: 500px;
     height: 500px;
@@ -23,6 +23,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
     align-items: center;
     width: 100%; 
     gap: 30px;
@@ -50,7 +51,7 @@
     cursor: pointer;
 }
 
-.inputUN, .inputUE , .inputPass {
+#inputUN, #inputUE , #inputPass {
     width: 50%;
     height: 40px;
     border-style: none;
@@ -100,7 +101,7 @@
         font-size: 14px; 
     }
 
-    .inputUN, .inputUE , .inputPass {
+    #inputUN, #inputUE , #inputPass {
         width: 45%;
         height: 30px;
         border-radius: 3px;

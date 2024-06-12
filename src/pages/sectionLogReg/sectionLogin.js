@@ -3,8 +3,8 @@ import { Header } from '../../components/header/header';
 import { Account } from '../../account/myAccount/account';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
+import { formData } from '../../components/forms/form';
 import './sectionLogin.css'; 
-
 
 
 export const sectionLogin = () => {
@@ -14,14 +14,11 @@ export const sectionLogin = () => {
     Login(section);//dónde va a pintar el logueo
 }
 
-
+// FORMULARIO LOGIN
 const Login = (parentNode) => {
     
     const divLogin = document.createElement('div');
     divLogin.id = "divLogin";
-    const newLog = document.createElement('h2');
-    newLog.textContent = "LOGIN";
-    newLog.id = "loginH2";
     const div = document.createElement('div');
     div.className = "registrarseDiv";
     const pNotRegistered = document.createElement('span');
@@ -31,48 +28,47 @@ const Login = (parentNode) => {
     aRegNewUser.textContent = "Regístrate";
     aRegNewUser.id = "registrateAqui";
 
-    const loginForm = document.createElement("form");
-    loginForm.id = "loginForm";
-    const inputUserName = document.createElement("input");
-    inputUserName.className = "inputUN";
-    inputUserName.type = "text";
-    inputUserName.placeholder = "usuario";
-    inputUserName.autocomplete = "userName";
-    const inputPass = document.createElement("input");
-    inputPass.className = "inputPass";
-    inputPass.placeholder = "*****";
-    inputPass.type = "password";
-    inputPass.autocomplete = "password";
-    const buttonLog = document.createElement("button");
-    buttonLog.id = "buttonLog";
-    buttonLog.textContent = "Acceder";
+    const fields = [
+        { id: "inputUN", name: "usuario", placeholder: "usuario", type: "text", autocomplete: "userName" },
+        { id: "inputPass", name: "contraseña", placeholder: "*****", type: "password", autocomplete: "password" }
+      ];
+    const userData = formData(divLogin, "loginForm", "loginH2", "LOGIN", fields )
 
-    
     parentNode.appendChild(divLogin);
-    divLogin.appendChild(newLog);
+    divLogin.appendChild(userData);
     divLogin.appendChild(div);
     div.appendChild(pNotRegistered);
     div.appendChild(aRegNewUser);
-    divLogin.appendChild(loginForm);
-    loginForm.appendChild(inputUserName);
-    loginForm.appendChild(inputPass);
-    loginForm.appendChild(buttonLog);
+
+    const buttonLog = document.createElement("button");
+    buttonLog.id = "buttonLog";
+    buttonLog.type = "submit";
+    buttonLog.textContent = "Acceder";
+    userData.appendChild(buttonLog);
  
 
     aRegNewUser.addEventListener('click', (e) => {
         sectionRegister();
     })
     
-    loginForm.addEventListener("submit", (e) => {
+    userData.addEventListener("submit", (e) => {
         e.preventDefault()
-        submit(inputUserName.value, inputPass.value, loginForm);
-        //console.log("he hecho submit");
+        const inputUserName = document.getElementById("inputUN").value;
+        const  inputPass = document.getElementById("inputPass").value;
+        submit(inputUserName, inputPass, userData);
     })
     
 }  
         
     
 const submit = async  (userName,  password,  form) => {
+
+     //si falta el nombre, el mail o el pass...
+     if (!userName || !password) {
+        errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
+        console.log("faltan datos")
+        return;
+    }
 
     const objetoFinal = JSON.stringify({
         userName,
@@ -89,7 +85,12 @@ const submit = async  (userName,  password,  form) => {
 
    const res = await fetch(`${urlApi}/api/auth/login`, opciones); 
 
-   if (res.status === 400) {
+   if (res.status === 200) {
+    console.log("login!");
+    return;
+    }
+
+    if (res.status === 400) {
         errorWarning(form, "Usuario y/o contraseña incorrectos", "rgb(244, 159, 128)")
         return;
     }

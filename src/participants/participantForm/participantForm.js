@@ -3,6 +3,7 @@ import { Home } from '../../pages/home/home';
 import { successfulNotice} from '../../utils/success/success';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
+import { formData } from '../../components/forms/form';
 
 export const participantRegister = (eventId) => {
     const section = document.querySelector("#principal");
@@ -20,48 +21,42 @@ const ParticipantForm = (eventId) => {
     beautydiv.id = "beautyDiv";
     const divParticipant = document.createElement('div');
     divParticipant.id = "divParticipant";
-    const h2Participant = document.createElement('h2');
-    h2Participant.textContent = "RELLENA TUS DATOS";
-    h2Participant.id = "h2Participant";
     const participantForm = document.createElement("form");
-    participantForm.id = "participantForm";
-    const participantName = document.createElement("input");
-    participantName.id = "participantName";
-    participantName.placeholder = "tu nombre";
-    participantName.type = "text";
-    const participantSurname = document.createElement("input");
-    participantSurname.id = "participantSurname";
-    participantSurname.placeholder = "tu apellido";
-    participantSurname.type = "text";
-    const participantEmail = document.createElement('input');
-    participantEmail.id = "participantEmail";
-    participantEmail.placeholder = "tumail@email.com";
-    participantName.type = "text";
+
+
+    const fields = [
+        { id: "participantName", name: "nombre", placeholder: "tu nombre", type: "text" },
+        { id: "participantSurname", name: "apellidos", placeholder: "tus apellidos", type: "text" },
+        { id: "participantEmail", name: "email", placeholder: "tu-email@email.com", type: "email" }
+      ];
+      
+    const participantData = formData( participantForm , "participantForm","h2Participant", "RELLENA TUS DATOS", fields);
+
+    section.appendChild(beautydiv);
+    beautydiv.appendChild(divParticipant);
+    divParticipant.appendChild(participantData);
+
     const buttonSend = document.createElement("button");
     buttonSend.id = "buttonSend";
     buttonSend.textContent = "Enviar";
     buttonSend.type = "submit";
 
-    section.appendChild(beautydiv);
-    section.appendChild(divParticipant);
-    divParticipant.appendChild(participantForm);
-    participantForm.appendChild(h2Participant);
-    participantForm.appendChild(participantName);
-    participantForm.appendChild(participantSurname);
-    participantForm.appendChild(participantEmail);
-    participantForm.appendChild(buttonSend);
-   
+    participantData.appendChild(buttonSend);
 
 
-    //BOTON FORMULARIO REGISTRO DEL PARTICIPANTE
-    participantForm.addEventListener('submit', (e)=> {
+    //BOTON SUBMIT REGISTRO DEL PARTICIPANTE
+    participantData.addEventListener('submit', (e)=> {
         e.preventDefault()
+        const participantName = document.getElementById('participantName').value;
+        const participantSurname = document.getElementById('participantSurname').value;
+        const participantEmail = document.getElementById('participantEmail').value;
+
         submitParticipantReg(
-        participantName.value, 
-        participantSurname.value, 
-        participantEmail.value, 
+        participantName,
+        participantSurname,
+        participantEmail,
         eventId, 
-        participantForm)  
+        participantData)  
         console.log("Participante registrado");
     })
 }
@@ -69,6 +64,7 @@ const ParticipantForm = (eventId) => {
 
 //SUBMIT DEL REGISTRO DEL PARTICIPANTE
 const submitParticipantReg = async (name, surname, email, eventId, form) => {
+    console.log(name, surname,email, eventId, form )
 
     const newParticipant = JSON.stringify({
         name,
@@ -88,7 +84,6 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
 
     const res = await fetch(`${urlApi}/api/participant/register`, opciones);
 
-   
     if (res.status === 200) {
         successfulNotice(form, "Gracias! Ya tienes los detalles del evento en tu mail 😁","green")
         setTimeout(() => {
