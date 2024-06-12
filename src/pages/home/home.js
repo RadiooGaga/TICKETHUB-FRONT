@@ -229,6 +229,7 @@ export const printDetails = (event, div) => {
     
         if ((ulDisplay.style.display === "none" || ulDisplay.style.display === "") && user.rol === "admin") {
           try {
+            
             const response = await fetch(`${urlApi}/api/participants/event/${event._id}`,{
               method: 'GET',
               headers: {
@@ -285,7 +286,6 @@ export const printDetails = (event, div) => {
 }  
 
 
-
 // Función para añadir evento desde el joinButton y almacenarlo en localstorage.
 export const addEvent = async (event) => {
 
@@ -329,21 +329,3 @@ export const addEvent = async (event) => {
   localStorage.setItem("user", JSON.stringify(user));
   return changeButton;
 }
-
-  
-
-
-
-  
-
- 
-
- 
-
-
-
-
-
-
-    
-

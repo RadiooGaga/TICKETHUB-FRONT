@@ -29,7 +29,7 @@
     object-fit: cover;
 }
 
-.divDetails {
+#divDetails {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -486,7 +486,7 @@
         width: 50%;
     }
 
-    .divDetails {
+    #divDetails {
         width: 50%;
     }
 }
