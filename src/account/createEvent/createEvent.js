@@ -160,7 +160,7 @@ const submitEvent = async (eventName, date, location, img, description, category
     }
 
     try {
-        const res = await fetch(`${urlApi}/api/user/new-event`, fetchOptions);
+        const res = await fetch(`${urlApi}/api/new-event`, fetchOptions);
         const respuestaFinal = await res.json();
         console.log(respuestaFinal)
 

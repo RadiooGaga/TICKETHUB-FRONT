@@ -313,7 +313,7 @@ const updateEvent = async (id, event) => {
     }
   }
   
-  const res = await fetch(`${urlApi}/api/user/update-event/${id}`, fetchOptions);
+  const res = await fetch(`${urlApi}/api/update-event/${id}`, fetchOptions);
 
   const respuestaFinal = await res.json();
   console.log(respuestaFinal)
@@ -350,7 +350,7 @@ export const deleteEvent = async (event) => {
   };
 
   try {
-    const res = await fetch(`${urlApi}/api/user/delete-event/${event._id}`, options);
+    const res = await fetch(`${urlApi}/api/delete-event/${event._id}`, options);
     const data = await res.json();
 
     if (res.ok) {

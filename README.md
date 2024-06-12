@@ -57,7 +57,7 @@ Registro y login de usuario + registro de participante sin cuenta
 
 Crear evento.
 
-- **URL:** `http://localhost:3004/api/user/new-event`
+- **URL:** `http://localhost:3004/api/new-event`
 
 Barra de búsqueda.
 
@@ -109,7 +109,7 @@ Actualizar usuario
 
 Actualizar evento
 
-- **URL** `http://localhost:3004/api/user/update-event/eventId`
+- **URL** `http://localhost:3004/api/update-event/eventId`
 
 ------------------------------------------------------------.
 
@@ -121,7 +121,7 @@ Borrar usuario
 
 Borrar evento
 
-- **URL** `http://localhost:3004/api/user/delete-event/eventId`
+- **URL** `http://localhost:3004/api/delete-event/eventId`
 
 --------------------------------------------------------------.
 
