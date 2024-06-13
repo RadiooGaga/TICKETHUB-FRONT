@@ -1,9 +1,8 @@
-import { printDetails } from '../../pages/home/home';
 import { Account } from '../myAccount/account';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { printCard } from '../../utils/eventCard/eventCard';
 import { adminButtons } from '../../components/Buttons/buttonsAdmin/buttonsAdmin';
-import { attendeesCounter } from '../../components/Buttons/buttonsAdmin/buttonsAdmin';
+import { formCrearEvento } from '../../components/forms/createEvForm';
 import './eventsCreated.css';
 import '../../pages/home/home.css';
 
@@ -25,7 +24,6 @@ export const eventsCreated = async () => {
 
     printEventsCreated (events, divEventsCreated);
 };
-
 
 
 // PINTAR LOS EVENTOS CREADOS EN "EVENTOS CREADOS"
@@ -56,12 +54,14 @@ const printEventsCreated = (events, parentDiv) => {
 
     const divBottomDetails = document.createElement('div');
     divBottomDetails.id = "divBottomDetails";
-
-    const { divCounter, counter, participantsCounter } = 
-    attendeesCounter(divBottomDetails, "divCounter", "asistentes", "seeParticipantsButton",
-      '/assets/pics/abajo.png', "counterImg", "counterDiv", "desplegarParticipantes")
     const editEventButton = adminButtons(divBottomDetails, "editAdminButton","EDITAR")
     const deleteEventButton = adminButtons(divBottomDetails, "deleteAdminButton","ELIMINAR")
+
+    parentDiv.appendChild(divCardEvent);
+    divCardEvent.appendChild(divDetailsCard);
+    divDetailsCard.appendChild(divBottomDetails);
+    divBottomDetails.appendChild(editEventButton);
+    divBottomDetails.appendChild(deleteEventButton);
 
     const joinButton = document.createElement('button');
     joinButton.className = "joinButton";
@@ -74,42 +74,6 @@ const printEventsCreated = (events, parentDiv) => {
         joinButton.style.display = "none";
       }
 
-      //BOTÓN PARA MOSTRAR ASISTENTES
-      counter.addEventListener('click', async (e) => {
-        const ulDisplay = document.querySelector('#counterDiv');
-        console.log(ulDisplay, "donde está la listaaa")
-    
-        if ((ulDisplay.style.display === "none" || ulDisplay.style.display === "") && user.rol === "admin") {
-          try { 
-            const response = await fetch(`${urlApi}/api/participants/event/${event._id}`,{
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("token")}`,
-              }
-            });
-                if (!response.ok) {
-                  throw new Error('Error en la respuesta del servidor');
-                }
-
-            const participants = await response.json();
-            participantsCounter.innerHTML = '';
-    
-            for (const participant of participants.Asistentes) {
-              const li = document.createElement('li');
-              li.textContent = participant;
-              participantsCounter.appendChild(li); 
-            }
-            ulDisplay.style.display = "flex";
-
-          } catch (error) {
-            console.error('Error al obtener los participantes:', error);
-          }
-        } else {
-          ulDisplay.style.display = "none";
-        }
-      });
-
       // CLICK EDITAR
       editEventButton.addEventListener("click", (e) => {
         window.scrollTo({
@@ -117,6 +81,7 @@ const printEventsCreated = (events, parentDiv) => {
           behavior: 'smooth'
         });
         updateForm(event, parentDiv);
+        
       })
 
       // CLICK ELIMINAR EVENTO
@@ -126,18 +91,9 @@ const printEventsCreated = (events, parentDiv) => {
         
       })  
      
-      
-    parentDiv.appendChild(divCardEvent);
-    divCardEvent.appendChild(divDetailsCard);
-    divDetailsCard.appendChild(divBottomDetails);
-    divBottomDetails.appendChild(divCounter);
-    divBottomDetails.appendChild(editEventButton);
-    divBottomDetails.appendChild(deleteEventButton);
-   
   }
   section.appendChild(parentDiv);
 }
-
 
 
 // FUNCIÓN DECISIONES
@@ -179,64 +135,27 @@ export const warning = (parentDiv, funcion, event, text) => {
 }
 
 
-
-
 // FORMULARIO ESCONDIDO PARA ACTUALIZAR EVENTO
 export const updateForm = (event, parentDiv) => {
 
   const divEventFormUpdate = document.createElement('div');
   divEventFormUpdate.id = "divEventFormularioUpdate";
-  const updateForm = document.createElement('form');
-  updateForm.id = "enterEventFormUpdate";
-  const h3UpdateEvent = document.createElement('h3');
-  h3UpdateEvent.id = "h3updateEvent";
-  h3UpdateEvent.textContent = "ACTUALIZA TU EVENTO";
+
+  const fields = [
+    { id: "inputUpdateEventId", type: "text",  placeholder: "actualizar nombre", value: event.eventName},
+    { id: "inputUpdateDate", type: "text", placeholder: "día", value:event.date },
+    { id: "locationUpdateInput", type: "text", placeholder: "ubicación", value: event.location },
+    { id: "fileUpdateInput", type: "file" },
+    { id: "inputUpdateDescription", type: "text", placeholder: "nueva descripción", value: event.description}
+  ];
+  const { enterForm, categorySelector, categories } = 
+  formCrearEvento(divEventFormUpdate, "enterEventFormUpdate", "h3updateEvent", "ACTUALIZA TU EVENTO",
+    fields, "selectUpdateCategories")
+
   const noteToUpdate = document.createElement('span');
   noteToUpdate.id = "noteToUpdate";
   noteToUpdate.textContent = "Actualiza los campos que necesites";
-  const inputUpdateEvent = document.createElement('input');
-  inputUpdateEvent.placeholder = "actualizar nombre";
-  inputUpdateEvent.type = "text";
-  inputUpdateEvent.id = "inputUpdateEventId";
-  inputUpdateEvent.value = event.eventName;
-  const inputUpdateDate = document.createElement('input');
-  inputUpdateDate.placeholder = "día";
-  inputUpdateDate.type = "text";
-  inputUpdateDate.id = "inputUpdateDate";
-  inputUpdateDate.value = event.date;
-  const locationUpdateInput = document.createElement('input');
-  locationUpdateInput.placeholder = "ubicación";
-  locationUpdateInput.id = "locationUpdateInput";
-  locationUpdateInput.type = 'text';
-  locationUpdateInput.value = event.location;
-  const fileUpdateInput = document.createElement('input');
-  fileUpdateInput.id = "fileUpdateInput";
-  fileUpdateInput.type = 'file';
-  const inputUpdateDescription = document.createElement('textarea');
-  inputUpdateDescription.id = "inputUpdateDescription";
-  inputUpdateDescription.placeholder = "nueva descripcion";
-  //inputUpdateDescription.rows = 10; 
-  inputUpdateDescription.value = event.description;
 
-  const categorySelector = document.createElement('select');
-  categorySelector.id = "selectUpdateCategories";
-  const categories = [
-      { id:1, value: "conciertos", textContent: "conciertos"},
-      { id:2, value: "teatro", textContent: "teatro" },
-      { id:3, value: "exposiciones", textContent: "exposiciones" },
-      { id:4, value: "ferias", textContent: "ferias" },
-      { id:5, value: "talleres", textContent: "talleres" }
-  ]
-  for (const category of categories) {
-    const option = document.createElement('option');
-      option.id = category.id;
-      option.value = category.value;
-      option.textContent = category.textContent;
-      if (category.value === event.category) {
-        option.selected = true;
-      }
-      categorySelector.appendChild(option);
-  }
   let selectedCategoryId = categories[0].value;
 
   // EVENTO DE CAMBIO DE CATEGORÍA.
@@ -259,20 +178,12 @@ export const updateForm = (event, parentDiv) => {
       backToEventsCreated.remove()
     })
 
-    console.log(parentDiv)
-    console.log(divEventFormUpdate)
     parentDiv.appendChild(divEventFormUpdate);
-    divEventFormUpdate.appendChild(updateForm);
-    updateForm.appendChild(h3UpdateEvent);
-    updateForm.appendChild(noteToUpdate);
-    updateForm.appendChild(inputUpdateEvent);
-    updateForm.appendChild(inputUpdateDate);
-    updateForm.appendChild(locationUpdateInput);
-    updateForm.appendChild(fileUpdateInput);
-    updateForm.appendChild(inputUpdateDescription);
-    updateForm.appendChild(categorySelector);
-    updateForm.appendChild(buttonUpdateEvent);
-    updateForm.appendChild(buttonGoBack);
+    divEventFormUpdate.appendChild(enterForm);
+    enterForm.appendChild(noteToUpdate);
+    enterForm.appendChild(categorySelector);
+    enterForm.appendChild(buttonUpdateEvent);
+    enterForm.appendChild(buttonGoBack);
 
 
     //imagen para subir al evento
@@ -292,12 +203,16 @@ export const updateForm = (event, parentDiv) => {
 
  // BOTÓN DE ACTUALIZAR EVENTO
   buttonUpdateEvent.addEventListener('click', (e) => {
+    const inputEvent = document.getElementById("inputUpdateEventId").value;
+    const inputDate = document.getElementById("inputUpdateDate").value;
+    const locationInput = document.getElementById("locationUpdateInput").value;
+    const inputDescription = document.getElementById("inputUpdateDescription").value;
     
     const updatedEvent = {
-      eventName: inputUpdateEvent.value,
-      date: inputUpdateDate.value,
-      location: locationUpdateInput.value,
-      description: inputUpdateDescription.value,
+      eventName: inputEvent,
+      date: inputDate,
+      location: locationInput,
+      description: inputDescription,
       category: selectedCategoryId
     };
 
@@ -309,9 +224,11 @@ export const updateForm = (event, parentDiv) => {
     .then((returned) => {
       if (returned === null) {
         alert('HA HABIDO UN ERROR AL INTENTAR ACTUALIZAR EL EVENTO');
+      } else {
+        eventsCreated(returned, parentDiv.id) 
+        // este es el evento actualizado recibido por la API
       }
-      printDetails(returned, parentDiv.id) 
-      // este es el evento actualizado recibido por la API
+      
     })
   });
 
@@ -353,7 +270,6 @@ const updateEvent = async (id, event) => {
     }
   
 }
-
 
 
 

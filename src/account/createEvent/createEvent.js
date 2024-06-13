@@ -1,6 +1,8 @@
 import './createEvent.css';
 import { Account } from '../myAccount/account';
 import { eventsCreated } from '../eventsCreated/eventsCreated';
+import { formCrearEvento } from '../../components/forms/createEvForm';
+import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 
 
@@ -11,54 +13,25 @@ export const eventForm = async () => {
     const section = document.querySelector("#principal");
     section.innerHTML = "";
     Account();
+
     const divEnter = document.createElement('div');
     divEnter.id = "divEventFormulario";  
-    const h3createEvent = document.createElement('h3');
-    h3createEvent.className = "h3createEvent";
-    h3createEvent.textContent = "CREA TU EVENTO";
-    const enterForm = document.createElement('form');
-    enterForm.innerHTML = "";
-    enterForm.id = "enterEventForm";
-    const inputEvent = document.createElement('input');
-    inputEvent.placeholder = "tu evento";
-    inputEvent.type = "text";
-    inputEvent.id = "inputEventId";
-    const inputDate = document.createElement('input');
-    inputDate.placeholder = "día";
-    inputDate.type = "text";
-    inputDate.id = "inputeEventDate";
-    const locationInput = document.createElement('input');
-    locationInput.placeholder = "ubicación";
-    locationInput.id = "locationInput";
-    locationInput.type = 'text';
-    const fileInput = document.createElement('input');
-    fileInput.id = "fileInput";
-    fileInput.type = 'file';
-    const inputDescription = document.createElement('input');
-    inputDescription.id = "inputDescription";
-    inputDescription.placeholder = "describe tu evento";
-    inputDescription.type = "text";
-    let participants = [];
     const user = JSON.parse(localStorage.getItem("user"));
     const creator = `${user._id}`;
-    const categorySelector = document.createElement('select');
-    categorySelector.id = "selectCategories";
-    const categories = [
-        { id:1, value: "conciertos", textContent: "conciertos"},
-        { id:2, value: "teatro", textContent: "teatro" },
-        { id:3, value: "exposiciones", textContent: "exposiciones" },
-        { id:4, value: "ferias", textContent: "ferias" },
-        { id:5, value: "talleres", textContent: "talleres" }
-    ]
-    for (const category of categories) {
-        const option = document.createElement('option');
-        option.id = category.id;
-        option.value = category.value;
-        option.textContent = category.textContent;
-        categorySelector.appendChild(option);
-    }
-    let selectedCategoryId = categories[0].value;
+    let participants = [];
 
+    const fields = [
+        { id: "inputEventId", type: "text",  placeholder: "tu evento" },
+        { id: "inputeEventDate", type: "text", placeholder: "día"},
+        { id: "locationInput", type: "text", placeholder: "ubicación" },
+        { id: "fileInput", type: "file" },
+        { id: "inputDescription", type: "text", placeholder: "describe tu evento"}
+      ];
+    
+    const { enterForm, categorySelector, categories } = formCrearEvento(divEnter,"enterEventForm", "h3createEvent", "CREA TU EVENTO",
+    fields, "selectCategories")
+    
+    let selectedCategoryId = categories[0].value;
 
     // EVENTO DE CAMBIO DE CATEGORÍA.
     categorySelector.addEventListener('change', function() {
@@ -70,20 +43,11 @@ export const eventForm = async () => {
     buttonCreateEvent.id = "createEventButton";
     buttonCreateEvent.textContent = "CREAR!";
     buttonCreateEvent.type = "submit";
-    const pError = document.createElement('p');
-    pError.id = "error";
 
     section.appendChild(divEnter);
     divEnter.appendChild(enterForm);
-    enterForm.appendChild(h3createEvent)
-    enterForm.appendChild(inputEvent);
-    enterForm.appendChild(inputDate);
-    enterForm.appendChild(locationInput);
-    enterForm.appendChild(fileInput);
-    enterForm.appendChild(inputDescription);
     enterForm.appendChild(categorySelector);
     enterForm.appendChild(buttonCreateEvent);
-    enterForm.appendChild(pError);
     
 
     //imagen para subir al evento
@@ -102,16 +66,19 @@ export const eventForm = async () => {
     // Lee el contenido del archivo como una URL de datos.
     }); 
 
-    
     //BOTÓN "CREAR EVENTO"
     buttonCreateEvent.addEventListener("click", (e) => {
         e.preventDefault();
+        const inputEvent = document.getElementById("inputEventId").value;
+        const inputDate = document.getElementById("inputeEventDate").value;
+        const locationInput = document.getElementById("locationInput").value;
+        const inputDescription = document.getElementById("inputDescription").value;
         submitEvent(
-                inputEvent.value, 
-                inputDate.value, 
-                locationInput.value, 
+                inputEvent, 
+                inputDate, 
+                locationInput, 
                 imgContent, 
-                inputDescription.value, 
+                inputDescription, 
                 selectedCategoryId,
                 participants,
                 creator,
@@ -122,16 +89,11 @@ export const eventForm = async () => {
 
 
 //FUNCIÓN SUBMIT DE "CREAR EVENTO"
-const submitEvent = async (eventName, date, location, img, description, category, participants, creator, form) => {
-
+const submitEvent = async (eventName, date, location, img, description, category, participants,  creator, form) => {
 
        //si falta el nombre, la fecha, la localización...etc
        if (!eventName || !date || !location || !img || !description || !category) {
-        const error = document.getElementById('error');
-        error.textContent = "Faltan campos por rellenar";
-        error.style = "color: rgb(244, 159, 128)";
-    
-        form.appendChild(error);
+        errorWarning(form, "faltan campos por rellenar", "#054444")
         console.log("faltan campos")
         return;
         } 

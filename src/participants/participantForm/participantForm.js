@@ -4,7 +4,7 @@ import { successfulNotice} from '../../utils/success/success';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { formData } from '../../components/forms/form';
-import { LOADING } from '../../components/loading/loading';
+//import { LOADING } from '../../components/loading/loading';
 
 
 export const participantRegister = (eventId) => {
@@ -64,7 +64,14 @@ const ParticipantForm = (eventId) => {
 
 //SUBMIT DEL REGISTRO DEL PARTICIPANTE
 const submitParticipantReg = async (name, surname, email, eventId, form) => {
-    console.log(name, surname,email, eventId, form )
+    console.log(name, surname, email, eventId, form )
+
+     ///si falta el nombre, el mail o el pass...
+      if (!name || !surname || !email) {
+        errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
+        console.log("faltan datos")
+        return;
+        }
 
     const newParticipant = JSON.stringify({
         name,
@@ -81,42 +88,34 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
             "Content-Type": "application/json"
         }
     }
+   
+    try {
+        const res = await fetch(`${urlApi}/api/participant/register`, opciones);
+        const respuestaFinal = await res.json();
+        console.log(respuestaFinal)
     
-
-    const res = await fetch(`${urlApi}/api/participant/register`, opciones);
-    
-
-    if (res.status === 200) {
-        successfulNotice(form, "Gracias! Ya tienes los detalles del evento en tu mail 😁","green")
-        setTimeout(() => {
-            Home()
-        }, 3000);
-
-    } else if (res.status === 409) {
-        errorWarning(form, "Ya estás inscrito en este evento", "lightblue");
-        setTimeout(() => {
-            Home()
-        }, 1000);
-
-    } else if (res.status === 400) {
-        errorWarning(form, "Faltan campos por rellenar", "lightblue");
-        setTimeout(() => {
-            var errorElement = document.querySelector('#statusMessage')
-            if (errorElement) {
-                errorElement.style.display = 'none';
-            }
+        switch (res.status) {
+            case 200:
+                console.log("participante apuntado")
+            successfulNotice(form, "Gracias! Ya tienes los detalles del evento en tu mail 😁","green")
+            setTimeout(() => {
+                Home()
+            }, 3000);
+            return;
+            case 409:
+            errorWarning(form, "Ya estás inscrito en este evento", "lightblue");
+            setTimeout(() => {
+                Home()
+            }, 2000);  
+            break;  
+            default: // else
+            console.log("Ocurrió un error inesperado");
+            errorWarning(form, "Ha ocurrido un error, revisa los campos", "red");
+        }
             
-        }, 3000);
-        
-    } else {
-        errorWarning(form, "Ha ocurrido un error", "red");
-        setTimeout(() => {
-            Home()
-        }, 3000);
+    } catch (error) {
+        console.error("Error al enviar la solicitud:", error);
     }
-        
-    const respuestaFinal = await res.json();
-    console.log(respuestaFinal)
 
     //localStorage.setItem("participant", JSON.stringify(respuestaFinal.participant));
 }

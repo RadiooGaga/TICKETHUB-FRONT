@@ -23,7 +23,7 @@
         border-radius: 5px;
     }
     
-    .h3createEvent {
+    #h3createEvent {
         display: flex;
         width: auto;
         flex-direction: column;
@@ -94,7 +94,7 @@
         background-color: rgba(87, 132, 132, 0.596);
     }
 
-    .h3createEvent {
+    #h3createEvent {
         font-size: 14px;
     }
 
@@ -136,7 +136,7 @@
         background-color: rgba(87, 132, 132, 0.596);
     }
 
-    .h3createEvent {
+    #h3createEvent {
         font-size: 16px;
         padding-top: 30px;
     }
@@ -176,7 +176,7 @@
         background-color: rgba(87, 132, 132, 0.596);
     }
 
-    .h3createEvent {
+    #h3createEvent {
         font-size: 16px;
     }
 
@@ -214,7 +214,7 @@
         background-color: rgba(87, 132, 132, 0.596);
     }
 
-    .h3createEvent {
+    #h3createEvent {
         font-size: 20px;
     }
 

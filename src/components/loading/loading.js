@@ -1,8 +1,7 @@
 export const LOADING = (parentDiv) => {
-    parentDiv.innerHTML ="";
 
     for (let i = 0; i < 10; i++) {
-        const spinnerDiv = document.createElement('div');
+        const spinnerDiv = document.getElementById('spinnerContainer');
         spinnerDiv.classList.add('spinner');
         parentDiv.innerHTML += `
         <div class="spinner">

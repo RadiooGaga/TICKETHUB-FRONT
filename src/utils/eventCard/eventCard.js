@@ -41,6 +41,8 @@ export const printCard = (divPadre, event, divCardDetails,
         divDetailsCard.appendChild(aCategory);
         divDetailsCard.appendChild(description);
 
+    
+
         divPadre.appendChild(divCardEvent);
         return { divCardEvent, divDetailsCard };     
 }
