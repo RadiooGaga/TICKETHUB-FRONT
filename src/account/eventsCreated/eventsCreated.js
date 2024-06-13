@@ -1,7 +1,11 @@
 import { printDetails } from '../../pages/home/home';
 import { Account } from '../myAccount/account';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
+import { printCard } from '../../utils/eventCard/eventCard';
+import { adminButtons } from '../../components/Buttons/buttonsAdmin/buttonsAdmin';
+import { attendeesCounter } from '../../components/Buttons/buttonsAdmin/buttonsAdmin';
 import './eventsCreated.css';
+import '../../pages/home/home.css';
 
 
 //RECARGA DE PÁGINA "EVENTOS CREADOS"
@@ -26,53 +30,40 @@ export const eventsCreated = async () => {
 
 // PINTAR LOS EVENTOS CREADOS EN "EVENTOS CREADOS"
 const printEventsCreated = (events, parentDiv) => {
+
   const section = document.querySelector('#principal');
 
   const flecha = document.createElement('img');
   flecha.src = './assets/pics/flecha1.png';
   flecha.id = "flechaArriba";
+
   let eventCounter = 0;
 
-
   for (const event of events) {
+    const { divCardEvent, divDetailsCard } = printCard(
+      parentDiv,
+      event,
+      "divCardDetail",
+      "divDetailImg",
+      "cardImg",
+      "divDetails",
+      "h3",
+      "span",
+      "span",
+      "category",
+      "descriptionParagraph"
+    );
 
-    const divFormUpdate = document.createElement('div');
-    divFormUpdate.id = "divFormUpdate";
-    const divCardEvent = document.createElement('div');
-    divCardEvent.id = "cardEventWithDetails";
-    const divImg = document.createElement('div');
-    divImg.className = "divImg";
-    const img = document.createElement('img');
-    const divDetails = document.createElement('div');
-    divDetails.className = "divDetails";
-    const eventName = document.createElement('h3');
-    const date = document.createElement('span');
-    const location = document.createElement('span');
-    const aCategory = document.createElement('a');
-    const description = document.createElement('p');
-    description.id = "descriptionParagraph";
-    const divBottom = document.createElement('div');
-    divBottom.id = "divBottom";
+    const divBottomDetails = document.createElement('div');
+    divBottomDetails.id = "divBottomDetails";
+
+    const { divCounter, counter, participantsCounter } = 
+    attendeesCounter(divBottomDetails, "divCounter", "asistentes", "seeParticipantsButton",
+      '/assets/pics/abajo.png', "counterImg", "counterDiv", "desplegarParticipantes")
+    const editEventButton = adminButtons(divBottomDetails, "editAdminButton","EDITAR")
+    const deleteEventButton = adminButtons(divBottomDetails, "deleteAdminButton","ELIMINAR")
+
     const joinButton = document.createElement('button');
-
-    const editButton = document.createElement('button');
-    editButton.id = "editEventButton";
-    editButton.textContent = "EDITAR";
-
-    const deleteButton = document.createElement('button');
-    deleteButton.id = "deleteEventButton";
-    deleteButton.textContent = "ELIMINAR EVENTO";
-    deleteButton.style.width = "12em";
-
-  
-    eventName.textContent = event.eventName/*.toUpperCase()*/;
-    date.textContent = `Fecha: ${event.date}`;
-    location.textContent = `${event.location}`;
-    img.src = event.img;
-    aCategory.textContent = `${event.category}`;
-    aCategory.id = "category";
-    description.textContent = event.description;
-    joinButton.textContent = "ASISTIR";
     joinButton.className = "joinButton";
     joinButton.id = `btn${eventCounter}`;
     eventCounter++;
@@ -83,8 +74,44 @@ const printEventsCreated = (events, parentDiv) => {
         joinButton.style.display = "none";
       }
 
+      //BOTÓN PARA MOSTRAR ASISTENTES
+      counter.addEventListener('click', async (e) => {
+        const ulDisplay = document.querySelector('#counterDiv');
+        console.log(ulDisplay, "donde está la listaaa")
+    
+        if ((ulDisplay.style.display === "none" || ulDisplay.style.display === "") && user.rol === "admin") {
+          try { 
+            const response = await fetch(`${urlApi}/api/participants/event/${event._id}`,{
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+              }
+            });
+                if (!response.ok) {
+                  throw new Error('Error en la respuesta del servidor');
+                }
+
+            const participants = await response.json();
+            participantsCounter.innerHTML = '';
+    
+            for (const participant of participants.Asistentes) {
+              const li = document.createElement('li');
+              li.textContent = participant;
+              participantsCounter.appendChild(li); 
+            }
+            ulDisplay.style.display = "flex";
+
+          } catch (error) {
+            console.error('Error al obtener los participantes:', error);
+          }
+        } else {
+          ulDisplay.style.display = "none";
+        }
+      });
+
       // CLICK EDITAR
-      editButton.addEventListener("click", (e) => {
+      editEventButton.addEventListener("click", (e) => {
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -93,7 +120,7 @@ const printEventsCreated = (events, parentDiv) => {
       })
 
       // CLICK ELIMINAR EVENTO
-      deleteButton.addEventListener("click", (e) => {
+      deleteEventButton.addEventListener("click", (e) => {
         const texto =  "¿SEGURO QUE DESEA ELIMINAR EL EVENTO?";
         warning(divCardEvent, deleteEvent, event, texto)
         
@@ -101,17 +128,11 @@ const printEventsCreated = (events, parentDiv) => {
      
       
     parentDiv.appendChild(divCardEvent);
-    divCardEvent.appendChild(divImg);
-    divCardEvent.appendChild(divDetails);
-    divImg.appendChild(img);
-    divDetails.appendChild(eventName);
-    divDetails.appendChild(date);
-    divDetails.appendChild(location);
-    divDetails.appendChild(aCategory);
-    divDetails.appendChild(description);
-    divDetails.appendChild(divBottom);  
-    divBottom.appendChild(editButton);
-    divBottom.appendChild(deleteButton);
+    divCardEvent.appendChild(divDetailsCard);
+    divDetailsCard.appendChild(divBottomDetails);
+    divBottomDetails.appendChild(divCounter);
+    divBottomDetails.appendChild(editEventButton);
+    divBottomDetails.appendChild(deleteEventButton);
    
   }
   section.appendChild(parentDiv);

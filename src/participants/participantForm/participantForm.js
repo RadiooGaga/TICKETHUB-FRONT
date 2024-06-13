@@ -4,11 +4,12 @@ import { successfulNotice} from '../../utils/success/success';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { formData } from '../../components/forms/form';
+import { LOADING } from '../../components/loading/loading';
+
 
 export const participantRegister = (eventId) => {
     const section = document.querySelector("#principal");
     section.innerHTML = "";
-
     ParticipantForm(eventId);
 }
 
@@ -22,7 +23,6 @@ const ParticipantForm = (eventId) => {
     const divParticipant = document.createElement('div');
     divParticipant.id = "divParticipant";
     const participantForm = document.createElement("form");
-
 
     const fields = [
         { id: "participantName", name: "nombre", placeholder: "tu nombre", type: "text" },
@@ -81,8 +81,10 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
             "Content-Type": "application/json"
         }
     }
+    
 
     const res = await fetch(`${urlApi}/api/participant/register`, opciones);
+    
 
     if (res.status === 200) {
         successfulNotice(form, "Gracias! Ya tienes los detalles del evento en tu mail 😁","green")
@@ -94,7 +96,7 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
         errorWarning(form, "Ya estás inscrito en este evento", "lightblue");
         setTimeout(() => {
             Home()
-        }, 3000);
+        }, 1000);
 
     } else if (res.status === 400) {
         errorWarning(form, "Faltan campos por rellenar", "lightblue");
@@ -103,7 +105,8 @@ const submitParticipantReg = async (name, surname, email, eventId, form) => {
             if (errorElement) {
                 errorElement.style.display = 'none';
             }
-        }, 1000);
+            
+        }, 3000);
         
     } else {
         errorWarning(form, "Ha ocurrido un error", "red");

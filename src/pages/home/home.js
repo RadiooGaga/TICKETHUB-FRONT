@@ -2,6 +2,9 @@ import { participantRegister } from '../../participants/participantForm/particip
 import { updateForm } from '../../account/eventsCreated/eventsCreated';
 import { warning } from '../../account/eventsCreated/eventsCreated';
 import { deleteEvent } from '../../account/eventsCreated/eventsCreated';
+import { printCard } from '../../utils/eventCard/eventCard';
+import { attendeesCounter } from '../../components/Buttons/buttonsAdmin/buttonsAdmin';
+import { adminButtons } from '../../components/Buttons/buttonsAdmin/buttonsAdmin';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
 import './home.css';
 
@@ -35,33 +38,27 @@ export const Home = async () => {
 
 //Función pintar los eventos de Home.
 export const printEvents = (events, divPadre) => {
-  
 
   for (const event of events) {
 
-    const divCardEvent = document.createElement('div');
-    divCardEvent.id = "cardEventHome";
-    const divTop = document.createElement('div');
-    divTop.className = "divTop";
-    const img = document.createElement('img');
-    img.id = "cardEventImg";
-    const divBottom = document.createElement('div');
-    divBottom.className = "divBottom";
-    const eventName = document.createElement('h3');
-    const divMiddle = document.createElement('div');
-    divMiddle.className = "divMiddle";
-    const date = document.createElement('span');
-    const location = document.createElement('span');
-    const aCategory = document.createElement('a');
-    const description = document.createElement('p');
-    description.id = "descriptionParagraph";
-    
-    eventName.textContent = event.eventName.toUpperCase();
-    date.textContent = `Fecha: ${event.date}`;
-    location.textContent = `${event.location}`;
-    img.src = event.img;
-    aCategory.textContent = `${event.category}`;
-    aCategory.id = "category";
+    const { divCardEvent, divDetailsCard } = printCard(
+      divPadre,
+      event,
+      "cardEventHome",
+      "divTop",
+      "cardEventImg",
+      "divBottom",
+      "h3",
+      "span",
+      "span",
+      "category",
+      "description"
+    );
+
+    const description = divDetailsCard.querySelector('#description');
+    if (description) {
+      description.style.display = 'none';
+    }
 
     const divBlueRedButtons = document.createElement('div');
     divBlueRedButtons.className = "divBlueRedButtons";
@@ -74,17 +71,10 @@ export const printEvents = (events, divPadre) => {
     seeDetailsButton.textContent = "VER MÁS";
     
     divPadre.appendChild(divCardEvent);
-    divCardEvent.appendChild(divTop);
-    divCardEvent.appendChild(divBottom);
-    divTop.appendChild(img);
-    divBottom.appendChild(eventName);
-    divBottom.appendChild(divMiddle);
-    divMiddle.appendChild(date);
-    divMiddle.appendChild(location);
-    divMiddle.appendChild(aCategory);
-    divBottom.appendChild(divBlueRedButtons);
+    divCardEvent.appendChild(divBlueRedButtons);
     divBlueRedButtons.appendChild(seeDetailsButton)
     divBlueRedButtons.appendChild(participantButton);
+
 
     // BOTÓN DE VER DETALLES
     seeDetailsButton.addEventListener('click', (e)=> {
@@ -155,81 +145,55 @@ export const printDetails = (event, div) => {
   const divEvents = document.getElementById(div);
   divEvents.innerHTML = "";
 
-
   const user = JSON.parse(localStorage.getItem("user"));
 
-    const cardEvent = document.createElement("div");
-    cardEvent.id = "divCardDetail"; 
-    const divDetailImg = document.createElement("div");
-    divDetailImg.id = "divDetailImg";
-    const img = document.createElement("img");
-    const divDetails = document.createElement("div");
-    divDetails.className = "divDetails";
-    const eventName = document.createElement('h3');
-    const date = document.createElement('span');
-    const location = document.createElement('span');
-    const aCategory = document.createElement('a');
-    const description = document.createElement('p'); 
+  const { divCardEvent, divDetailsCard } = printCard(
+    divEvents,
+    event,
+    "divCardDetail",
+    "divDetailImg",
+    "cardImg",
+    "divDetails",
+    "h3",
+    "span",
+    "span",
+    "category",
+    "descriptionParagraph"
+  );
+
     const xButton = document.createElement("button");
     xButton.id = "xButton";
     xButton.textContent = "X";
-
-    img.src = event.img;
-    eventName.textContent = event.eventName/*.toUpperCase()*/;
-    date.textContent = `Fecha: ${event.date}`;
-    location.textContent = `${event.location}`;
-    aCategory.textContent = `${event.category}`;
-    aCategory.id = "category";
-    description.textContent = event.description;
-    description.id = "descriptionParagraph";
 
     xButton.addEventListener("click", (e) => {
         Home()
         window.scrollTo(0,0)
     })
 
-    cardEvent.appendChild(divDetailImg);
-    cardEvent.appendChild(divDetails);
-    divDetailImg.appendChild(img);
-    divDetails.appendChild(xButton)
-    divDetails.appendChild(eventName);
-    divDetails.appendChild(date);
-    divDetails.appendChild(location);
-    divDetails.appendChild(aCategory);
-    divDetails.appendChild(description); 
+    divEvents.appendChild(divCardEvent);
+    divDetailsCard.appendChild(xButton);
 
-    /* Si hay usuario admin, se habilitan los botones para editar o borrar cualquier evento y
-    que se vean los participantes apuntados. */
-    if (user && user.rol === 'admin') {
-    
+
+    // BOTONES ADMIN: VERASISTENTES, EDITAR/BORRAR EVENTOS
+    if (user && user.rol === 'admin') { 
+
       const divBottomDetails = document.createElement('div');
-      divBottomDetails.className = "divBottomDetails";
-      const editAdminButton = document.createElement('button');
-      editAdminButton.id = "editAdminButton";
-      editAdminButton.textContent = "EDITAR";
-      const deleteAdminButton = document.createElement('button');
-      deleteAdminButton.id = "deleteAdminButton";
-      deleteAdminButton.textContent = "ELIMINAR";
-      const divCounter = document.createElement('div');
-      divCounter.id = "divCounter";
-      divCounter.textContent = "asistentes";
-      const counter = document.createElement('button');
-      counter.id = "seeParticipantsButton";
-      const counterImg = document.createElement('img');
-      counterImg.src = '/assets/pics/abajo.png';
-      counterImg.id = "counterImg";
-      const counterDiv = document.createElement('div');
-      counterDiv.id = "counterDiv";
-      const participantsCounter = document.createElement('ul');
-      participantsCounter.id = "desplegarParticipantes";
+      divBottomDetails.id = "divBottomDetails";
+
+      const { divCounter, counter, participantsCounter } = 
+      attendeesCounter(divBottomDetails, "divCounter", "asistentes", "seeParticipantsButton",
+      '/assets/pics/abajo.png', "counterImg", "counterDiv", "desplegarParticipantes")
+      const editEventButton = adminButtons(divBottomDetails, "editAdminButton","EDITAR")
+      const deleteEventButton = adminButtons(divBottomDetails, "deleteAdminButton","ELIMINAR")
+     
 
       //BOTÓN PARA MOSTRAR ASISTENTES
       counter.addEventListener('click', async (e) => {
         const ulDisplay = document.querySelector('#counterDiv');
+        console.log(ulDisplay, "donde está la listaaa")
     
         if ((ulDisplay.style.display === "none" || ulDisplay.style.display === "") && user.rol === "admin") {
-          try {
-            
+          try { 
             const response = await fetch(`${urlApi}/api/participants/event/${event._id}`,{
               method: 'GET',
               headers: {
@@ -237,9 +201,9 @@ export const printDetails = (event, div) => {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`,
               }
             });
-              if (!response.ok) {
-                throw new Error('Error en la respuesta del servidor');
-              }
+                if (!response.ok) {
+                  throw new Error('Error en la respuesta del servidor');
+                }
 
             const participants = await response.json();
             participantsCounter.innerHTML = '';
@@ -258,8 +222,9 @@ export const printDetails = (event, div) => {
           ulDisplay.style.display = "none";
         }
       });
-      
-      editAdminButton.addEventListener('click', (e) => {
+
+      //BOTÓN PARA EDITAR EVENTO
+      editEventButton.addEventListener('click', (e) => {
         window.scrollTo({
           top: 0,
           behavior: 'smooth'
@@ -267,22 +232,20 @@ export const printDetails = (event, div) => {
         updateForm(event, divEvents)
       })
   
-      deleteAdminButton.addEventListener('click', (e) => {
+      //BOTÓN PARA BORRAR EVENTO
+      deleteEventButton.addEventListener('click', (e) => {
         const texto =  "¿SEGURO QUE DESEA ELIMINAR EL EVENTO?";
-        warning(cardEvent, deleteEvent, event, texto)
+        warning(divCardEvent, deleteEvent, event, texto)
       })
       
-      divDetails.appendChild(divBottomDetails)
+      
+      divDetailsCard.appendChild(divBottomDetails)
       divBottomDetails.appendChild(divCounter);
-      divCounter.appendChild(counter);
-      counter.appendChild(counterImg);
-      counter.appendChild(counterDiv);
-      counterDiv.appendChild(participantsCounter);
-      divBottomDetails.appendChild(editAdminButton);
-      divBottomDetails.appendChild(deleteAdminButton);
+      divBottomDetails.appendChild(editEventButton);
+      divBottomDetails.appendChild(deleteEventButton);
     } 
   
-    divEvents.appendChild(cardEvent)
+    divEvents.appendChild(divCardEvent)
 }  
 
 

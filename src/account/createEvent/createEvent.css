@@ -11,7 +11,7 @@
     #enterEventForm {
         display: flex;
         position: absolute;
-        top: 11em;
+        top: 13em;
         flex-direction: column;
         justify-content: center;
         width: 560px;
@@ -206,7 +206,7 @@
     #enterEventForm {
         display: flex;
         width: 50%;
-        height: 420px;
+        height: 50%;
         flex-direction: column;
         align-items: center;
         gap: 10px;
@@ -219,12 +219,12 @@
     }
 
     #inputEventId, #inputeEventDate, #locationInput, #fileInput, #fileUpdateInput, #inputDescription, #selectCategories {
-        width: 250px;
-        height: 25px;
+        width: 350px;
+        height: 30px;
     }
 
     #inputDescription {
-        height: 50px;
+        height: 70px;
     }
 
     #createEventButton {

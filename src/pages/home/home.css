@@ -7,6 +7,7 @@
   width: 100%;
   height: auto;
   background-color: black; 
+  margin-bottom: 40px;
   padding: 40px 10px 60px;
   gap: 15px;
 }
@@ -22,29 +23,18 @@
   background-color: #000000;
 }
 
-.divTop {
+#divTop {
   width: 100%;
   height: auto;
 }
 
-.divTop > img {
+#cardEventImg {
   width: 100%;
   height: 290px;
   object-fit: cover;
 }
 
-
-.divMiddle {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  background-color: #5554544a;
-  border-radius: 5px;
-}
-
-.divBottom {
+#divBottom {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -53,58 +43,6 @@
   height: 120px;
   gap: 10px;
 }
-
-.divBlueRedButtons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-#category {
-  display: flex;
-  justify-content: center;
-  font-size: 15px;
-  color: #4a6a82;
-}
-
-#category:hover {
-  cursor: pointer;
-  color: #f3b09f;
-}
-
-
-#detailsButton, .joinButton, #participantButton {
-  width: 7em;
-  height: 20px;
-  font-size: 11px;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 5px;
-  background-color:#9c4c46 ;
-  color: black;
-  transition: 0.6s ease;
-}
-
-#detailsButton {
-  background-color:#4a6a82 ;
-}
-
-#participantButton {
-  width: 8em;
-  color: whitesmoke;
-}
-
-.joinButton:hover, #detailsButton:hover {
-  color: white;
-  cursor:pointer;
-}
-
-#participantButton:hover {
-  color: black;
-  cursor:pointer;
-}
-
 
 h3 {
   display: flex;
@@ -120,68 +58,44 @@ span {
   font-size: 12px;
 }
 
-#divCounter {
+#category {
   display: flex;
   justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-size: 12px;
-  color: #81aaca;
-  width: 200px;
-  height: 30px;
-  gap: 10px;
-  padding: 10px;
+  font-size: 15px;
+  color: #4a6a82;
 }
 
-
-#deleteAdminButton, #editAdminButton, #seeParticipantsButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 120px;
-  height: 30px;
-  background-color: rgb(70, 66, 66);
-  color: #C0BB94;
-  border-style: none;
-  border-radius: 5px;
-}
-
-#seeParticipantsButton {
-  display: block;
-  align-content: center;
-  width: 40px;
-  height: 30px;
-  background-color: #81aaca;
-}
-
-#counterImg {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-#deleteAdminButton:hover, #editAdminButton:hover, #seeParticipantsButton:hover {
+#category:hover {
   cursor: pointer;
+  color: #f3b09f;
 }
 
-#counterDiv {
-  display: none;
-  position: relative;
-  right: 5em;
-  top: 2em;
-  background-color: #4a6a82;
-  border-radius: 3px;
-  width: 300px;
-  height: 150px; /*DEBERÁ SER AUTO*/
-}
-
-#desplegarParticipantes {
+.divBlueRedButtons {
   display: flex;
-  justify-content: start;
-  text-align: start;
-  flex-direction: column;
-  padding: 20px;
-  overflow-y: auto;
+  justify-content: center;
+  gap: 20px;
+}
+
+#detailsButton, .joinButton, #participantButton {
+  width: 8em;
+  height: 20px;
+  font-size: 11px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 5px;
+  background-color:#9c4c46 ;
+  color: white;
+  transition: 0.6s ease;
+}
+
+#detailsButton {
+  background-color:#4a6a82 ;
+}
+
+.joinButton:hover, #detailsButton:hover, #participantButton:hover {
+  color: black;
+  cursor:pointer;
 }
 
 #flechaArriba {
@@ -199,43 +113,92 @@ span {
 }
 
 
-/* DETALLES DEL EVENTO AL ABRIR EVENTO */
+/* ESTILOS PARA OPCIONES DE ADMIN AL "VER MÁS"*/
 
-#divCardDetail {
+#divBottomDetails {
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  height: auto;
-  background-color: black;
-}
-
-#divDetailImg {
-  width: 50%;
-  height: 360px;
-}
-
-#divDetailImg > img {
-  width: 100%;
-  height: 360px;
-  object-fit: cover;
-}
-
-.divDetails {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 18px;
-  width: 50%;
-  height: auto;
+  width: 100%;
+  height: 30px;
+}
+
+#divCounter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 16px;
+  color: #81aaca;
+  width: 200px;
+  height: 30px;
+  gap: 10px;
+  padding: 10px;
+}
+
+
+#deleteAdminButton, #editAdminButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 30px;
+  background-color: rgb(70, 66, 66);
+  color: #C0BB94;
+  border-style: none;
+  border-radius: 5px;
+}
+
+#seeParticipantsButton {
+  display: block;
+  align-content: center;
+  width: 40px;
+  height: 30px;
+  border-style: none;
+  border-radius: 5px;
+  background-color: #81aaca;
+}
+
+
+#deleteAdminButton:hover, #editAdminButton:hover, #seeParticipantsButton:hover {
+  cursor: pointer;
+}
+
+
+#counterImg {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+#counterDiv {
+  display: none;
+  position: absolute;
+  top: 22em;
+  background-color: rgb(70, 66, 66);
+  border-radius: 3px;
+  width: 300px;
+  height: 60%;
+}
+
+#desplegarParticipantes {
+  display: flex;
+  justify-content: start;
+  text-align: start;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#desplegarParticipantes > li {
+  color: rgb(216, 211, 211);
+  font-size: 14px;
 }
 
 #xButton {
   position: absolute;
-  top: 1em;
-  right: 1em;
+  top: 1rem;
+  right: 5rem;
   width: 40px;
   height: 30px;
   border-style: none;
@@ -248,21 +211,6 @@ span {
   cursor: pointer;
 }
 
-#descriptionParagraph {
-  padding: 20px 50px;
-  font-family:Arial, Helvetica, sans-serif;
-  font-weight:100;
-  color:rgb(216, 211, 211);
-  font-size: 0.8em;
-}
-
-.divBottomDetails {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  height: 30px;
-}
 
 
 /* ---------------------- MEDIA QUERIES -------------------------*/
@@ -270,15 +218,20 @@ span {
 @media screen and (max-width: 480px) {
 
   #divEvents {
-    padding: 10px;
+    padding: 10px 10px 60px;
   }
 
   #cardEventHome {
     width: 100%;
-    height: 440px;
+    height: 470px;
     padding: 10px;
   }
-    /* DETALLES DEL EVENTO AL ABRIR EVENTO */
+
+  #cardEventImg {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+  }
 
   #divCardDetail {
     display: flex;
@@ -291,7 +244,7 @@ span {
     height: auto;
   }
 
-  .divDetails {
+  #divDetails {
     width: 100%;
     height: auto;
     padding-top: 20px;
@@ -299,28 +252,12 @@ span {
     gap: 10px;
   }
 
-  #descriptionParagraph {
-    padding: 10px 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-  }
-
-  .divBottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 50px;
-    gap: 15px;
-  }
-
- 
-  #detailsButton, .joinButton, #participantButon {
-    width: 6em;
-    height: 18px;
-    border: none;
-    border-radius: 5px;
-    font-size: 11px;
-    transition: 0.6s ease;
+  #xButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 35px;
+    height: 25px;
   }
 
   h3 {
@@ -331,38 +268,64 @@ span {
     font-size: 10px;
   }
 
-  .divBottomDetails {
+  #descriptionParagraph {
+    padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+  }
+  
+  #divBottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80px;
     gap: 10px;
   }
 
-  #deleteAdminButton, #editAdminButton {
-    width: 140px;
-    height: 22px;
-    font-size: 11px;
+  #divBottomDetails {
+    gap: 10px;
+    height: 50px;
   }
 
-  #flechaArriba {
-    width: 40px;
-    height: 40px;
-    bottom: 4.5em;
-    right: 2.5em;
+  #detailsButton, .joinButton, #participantButon {
+    width: 7em;
+  }
+
+  #deleteAdminButton, #editAdminButton {
+    width: 100px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  #divCounter {
+    padding: 0;
+    font-size: 14px;
+  }
+
+  #seeParticipantsButton {
+    width: 30px;
+    height: 28px;
   }
 
 }
 
 
-@media screen and (min-width: 480px) and (max-width: 767px) {
-
+@media screen and (min-width: 480px) and (max-width: 768px) {
   #divEvents {
-    padding: 10px;
+    padding: 10px 10px 60px;
   }
 
   #cardEventHome {
     width: 100%;
-    height: 440px;
+    height: 470px;
     padding: 10px;
   }
-    /* DETALLES DEL EVENTO AL ABRIR EVENTO */
+
+  #cardEventImg {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+  }
 
   #divCardDetail {
     display: flex;
@@ -375,7 +338,7 @@ span {
     height: auto;
   }
 
-  .divDetails {
+  #divDetails {
     width: 100%;
     height: auto;
     padding-top: 20px;
@@ -383,136 +346,109 @@ span {
     gap: 10px;
   }
 
-  #descriptionParagraph {
-    padding: 10px 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-  }
-
-  .divBottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 50px;
-    gap: 15px;
-  }
-
- 
-  #detailsButton, .joinButton, #participantButon {
-    width: 6em;
-    height: 18px;
-    border: none;
-    border-radius: 5px;
-    font-size: 11px;
-    transition: 0.6s ease;
+  #xButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 30px;
   }
 
   h3 {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   span, #category {
-    font-size: 10px;
+    font-size: 12px;
   }
 
-  .divBottomDetails {
-    gap: 10px;
+  #descriptionParagraph {
+    padding: 10px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+
+  #divBottomDetails {
+    height: 80px;
+  }
+
+  #detailsButton, .joinButton, #participantButon {
+    width: 7em;
   }
 
   #deleteAdminButton, #editAdminButton {
-    width: 140px;
-    height: 22px;
-    font-size: 11px;
+    width: 100px;
+    height: 28px;
+    font-size: 12px;
   }
 
-  #flechaArriba {
-    width: 40px;
-    height: 40px;
-    bottom: 4.5em;
-    right: 2.5em;
+  #divCounter {
+    padding: 0;
+    font-size: 16px;
   }
 
 }
 
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 769px) and (max-width: 1023px) {
 
   #divEvents {
-    padding: 10px;
+    padding: 40px 10px 60px;
   }
 
   #cardEventHome {
     width: 45%;
-    height: 440px;
+    height: 480px;
     padding: 10px;
   }
-    /* DETALLES DEL EVENTO AL ABRIR EVENTO */
 
   #divCardDetail {
     display: flex;
+    flex-direction: column;
     padding-bottom: 20px ;
   }
 
   #divDetailImg {
-    width: 50%;
+    width: 100%;
     height: auto;
   }
 
-  .divDetails {
-    width: 50%;
-    height: auto;
+  #cardImg {
+    width: 100%;
+    height: 300px; 
+  }
+
+  #divDetails {
+    width: 100%;
     padding-top: 20px;
     text-align: justify;
-    gap: 10px;
+    gap: 12px;
+    padding: 40px 20px;
+  }
+
+  #divBottomDetails {
+    height: 90px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  span, #category {
+    font-size: 14px;
   }
 
   #descriptionParagraph {
     padding: 10px 20px;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
-  }
-
-  .divBottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 50px;
-    gap: 15px;
-  }
-
- 
-  #detailsButton, .joinButton, #participantButon {
-    width: 6em;
-    height: 18px;
-    border: none;
-    border-radius: 5px;
-    font-size: 11px;
-    transition: 0.6s ease;
-  }
-
-  h3 {
-    font-size: 14px;
-  }
-
-  span, #category {
-    font-size: 10px;
-  }
-
-  .divBottomDetails {
-    gap: 10px;
+    font-size: 16px;
   }
 
   #deleteAdminButton, #editAdminButton {
     width: 140px;
-    height: 22px;
+    height: 28px;
     font-size: 11px;
-  }
-
-  #flechaArriba {
-    width: 40px;
-    height: 40px;
-    bottom: 4.5em;
-    right: 2.5em;
   }
 
 }
@@ -520,13 +456,15 @@ span {
 
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
 
+  #divEvents {
+    padding: 40px 10px 60px;
+  }
 
   #cardEventHome {
     width: 45%;
-    height: 440px;
+    height: 500px;
     padding: 10px;
   }
-    /* DETALLES DEL EVENTO AL ABRIR EVENTO */
 
   #divCardDetail {
     display: flex;
@@ -538,61 +476,64 @@ span {
     height: auto;
   }
 
-  .divDetails {
+  #cardImg {
+    height: 330px;
+  }
+
+  #divDetails {
     width: 50%;
     height: auto;
-    padding-top: 20px;
+    padding: 20px;
     text-align: justify;
-    gap: 10px;
+    gap: 15px;
+  }
+
+  #xButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 30px;
   }
 
   #descriptionParagraph {
     padding: 10px 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    font-size: 14px;
   }
 
-  .divBottom {
+  #divBottom {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 50px;
-    gap: 15px;
+    height: 100px;
+    gap: 6px;
   }
-
  
   #detailsButton, .joinButton, #participantButon {
-    width: 6em;
-    height: 18px;
+    width: 9em;
+    height: 28px;
     border: none;
     border-radius: 5px;
-    font-size: 11px;
+    font-size: 12px;
     transition: 0.6s ease;
   }
 
   h3 {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   span, #category {
-    font-size: 10px;
+    font-size: 14px;
   }
 
-  .divBottomDetails {
+  #divBottomDetails {
     gap: 10px;
   }
 
   #deleteAdminButton, #editAdminButton {
-    width: 140px;
-    height: 22px;
-    font-size: 11px;
-  }
-
-  #flechaArriba {
-    width: 40px;
-    height: 40px;
-    bottom: 4.5em;
-    right: 2.5em;
+    width: 100px;
+    height: 28px;
+    font-size: 12px;
   }
 
 }

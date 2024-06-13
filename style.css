@@ -6,13 +6,6 @@
   scroll-behavior: smooth;
 }
 
-/*
-@media screen and (max-width: 480px) {}
-@media screen and (min-width: 481px) and (max-width:768px){}
-@media screen and (min-width: 769px) and (max-width:1023px){}
-@media screen and (min-width:1024px) and (max-width:1440px) {}
-@media screen and (min-width:1441px) {}*/
-
 @font-face {
   font-family: 'arsenal';
   src: url('/assets/fonts/Arsenal/Arsenal-Regular.ttf') format('truetype'); font-weight:lighter; font-style: normal;
@@ -29,7 +22,7 @@
 
   --rtc--font-family-1: "arsenal";
   --rtc--font-family-2: "jersey25";
- 
+
 
   --rtc--color-1: hsl(203, 75%, 44%);
   --rtc--color-2: hsl(6, 74%, 62%);
@@ -60,15 +53,6 @@
   --rtc--gap-s: 3px;
 }
 
-
-
-main {
-  display: flex;
-  justify-content: center;
-  max-width: 100%;
-  height: 100%;
-}
-
 footer {
   display: flex;
   text-align: center;
@@ -76,20 +60,4 @@ footer {
   height: 65px;
   background-color:black;
   bottom: 0;
-}
-
-@media screen and (max-width: 480px) {
-
-}
-
-@media screen and (min-width: 481px) and (max-width: 768px){
-
-}
-
-@media screen and (min-width: 769px) and (max-width: 1023px){
-
-}
-
-@media screen and (min-width: 1024px) and (max-width: 1443px){
-
 }
