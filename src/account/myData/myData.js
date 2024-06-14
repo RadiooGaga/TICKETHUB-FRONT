@@ -50,6 +50,7 @@ const printMyData = (user, parentDiv) => {
     buttonDeleteAccount.addEventListener('click', (e) => {
       const texto = "¿SEGURO QUE DESEA ELIMINAR SU CUENTA?";
       warning(divMyData, deleteUser, user, texto);
+      loading(divMyData)
     })  
 
     parentDiv.appendChild(divMyData);

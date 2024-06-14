@@ -12,6 +12,9 @@ export const errorWarning = (parendiv, text, color, id = "statusMessage") => {
     errorMessage.textContent = text;
 
     parendiv.appendChild(errorMessage);
+    setTimeout(() => {
+        errorMessage.remove();
+    }, 3000);
 }
 
 

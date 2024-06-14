@@ -5,6 +5,7 @@ import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { formData } from '../../components/forms/form';
 import { helloByeFunc } from '../../components/saludos/saludos';
 import './sectionRegister.css'; 
+import { loading, removeLoader } from '../../components/loading/loading';
 
 
 export const sectionRegister = () => {
@@ -68,7 +69,12 @@ const submitReg = async (userName, email, password, rol, form) => {
      //si falta el nombre, el mail o el pass...
      if (!userName || !email || !password) {
         errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
-        console.log("faltan datos")
+        setTimeout(() => {
+            const existingMessage = document.getElementById("statusMessage");
+            if (existingMessage) {
+                form.removeChild(existingMessage);
+            }
+        }, 2000);
         return;
     }
 
@@ -86,6 +92,8 @@ const submitReg = async (userName, email, password, rol, form) => {
             "Content-Type": "application/json"
         }
     }
+        const container = document.getElementById('divRegister');
+        loading(container);
 
     try {
         const res = await fetch(`${urlApi}/api/auth/register`, fetchOptions);
@@ -116,7 +124,10 @@ const submitReg = async (userName, email, password, rol, form) => {
         }
     } catch (error) {
         console.error("Error al enviar la solicitud:", error);
+    } finally {
+        removeLoader()
     }
+
 
 };
 

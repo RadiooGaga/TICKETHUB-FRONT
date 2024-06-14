@@ -143,6 +143,7 @@
 
 #warningDiv {
     display: none;
+    text-align: center;
     flex-direction: column;
     position: absolute;
     left: 20%;
@@ -164,6 +165,7 @@
 
 #divYesNoButtons {
     display: flex;
+    text-align: center;
     justify-content: center;
     gap: 20px;  
 }
@@ -278,8 +280,8 @@
         align-items: center;
         justify-content: center;
         width: 10em;
-        height: 25px;
-        font-size: 10px;
+        height: 30px;
+        font-size: 13px;
     }
 
     #eventsEmpty {
@@ -312,7 +314,7 @@
         padding: 20px;
         position: relative;
         bottom: 11em;
-        height: 450px;
+        height: 480px;
     }
 
     #inputUpdateEventId, #inputUpdateDate, #locationUpdateInput, #fileInputUpdate, #inputUpdateDescription, #selectUpdateCategories {
@@ -334,8 +336,8 @@
         align-items: center;
         justify-content: center;
         width: 10em;
-        height: 25px;
-        font-size: 10px;
+        height: 30px;
+        font-size: 14px;
     }
 }
 
@@ -358,7 +360,7 @@
         padding: 20px;
         position: relative;
         bottom: 11em;
-        height: 450px;
+        height: 550px;
     }
 
     #inputUpdateEventId, #inputUpdateDate, #locationUpdateInput, #fileInputUpdate, #inputUpdateDescription, #selectUpdateCategories {
@@ -380,8 +382,8 @@
         align-items: center;
         justify-content: center;
         width: 10em;
-        height: 25px;
-        font-size: 10px;
+        height: 35px;
+        font-size: 14px;
     }
 
     #eventsEmpty {

@@ -5,6 +5,7 @@ import { adminButtons } from '../../components/Buttons/buttonsAdmin/buttonsAdmin
 import { formCrearEvento } from '../../components/forms/createEvForm';
 import './eventsCreated.css';
 import '../../pages/home/home.css';
+import { loading, removeLoader } from '../../components/loading/loading';
 
 
 //RECARGA DE PÁGINA "EVENTOS CREADOS"
@@ -216,6 +217,9 @@ export const updateForm = (event, parentDiv) => {
       category: selectedCategoryId
     };
 
+    const container = document.getElementById('enterEventFormUpdate');
+    loading(container)
+
     if (imgContent !== null) {
       updatedEvent.img = imgContent
     }
@@ -286,6 +290,7 @@ export const deleteEvent = async (event) => {
      }
   };
 
+
   try {
     const res = await fetch(`${urlApi}/api/delete-event/${event._id}`, options);
     const data = await res.json();
@@ -302,6 +307,8 @@ export const deleteEvent = async (event) => {
        
   } catch (error) {
       console.error('Error en la solicitud:', error);
+  } finally {
+    removeLoader()
   }
 
 };

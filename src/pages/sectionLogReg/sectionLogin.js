@@ -6,6 +6,7 @@ import { urlApi } from '../../utils/apiUrl/apiUrl';
 import { formData } from '../../components/forms/form';
 import { helloByeFunc } from '../../components/saludos/saludos';
 import './sectionLogin.css'; 
+import { loading, removeLoader } from '../../components/loading/loading';
 
 
 
@@ -67,7 +68,12 @@ const submit = async  (userName,  password,  form) => {
         //si falta el nombre, el mail o el pass...
         if (!userName || !password) {
             errorWarning(form, "Complete el formulario", "rgb(244, 159, 128)")
-            console.log("faltan datos")
+            setTimeout(() => {
+                const existingMessage = document.getElementById("statusMessage");
+                if (existingMessage) {
+                    form.removeChild(existingMessage);
+                }
+            }, 2000);
             return;
         }
 
@@ -83,8 +89,11 @@ const submit = async  (userName,  password,  form) => {
             "Content-Type": "application/json"
         }
     }
+        const container = document.getElementById('divLogin')
+        loading(container)
 
     try {
+        
         const res = await fetch(`${urlApi}/api/auth/login`, opciones);
         const respuestaFinal = await res.json();
         console.log(respuestaFinal); 
@@ -108,8 +117,10 @@ const submit = async  (userName,  password,  form) => {
                 default: // else
                     console.log("Ocurrió un error inesperado");
         }
-    } catch (error) {
+    } catch (error) {   
         console.error("Error al enviar la solicitud:", error);
+    } finally {
+        removeLoader()
     }
 
 }

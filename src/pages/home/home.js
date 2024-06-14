@@ -235,6 +235,8 @@ export const printDetails = (event, div) => {
       //BOTÓN PARA BORRAR EVENTO
       deleteEventButton.addEventListener('click', (e) => {
         const texto =  "¿SEGURO QUE DESEA ELIMINAR EL EVENTO?";
+        const container = document.getElementById('divYesNoButtons')
+        loading(container);
         warning(divCardEvent, deleteEvent, event, texto)
       })
       

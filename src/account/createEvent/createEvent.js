@@ -4,6 +4,7 @@ import { eventsCreated } from '../eventsCreated/eventsCreated';
 import { formCrearEvento } from '../../components/forms/createEvForm';
 import { errorWarning } from '../../utils/errores/errores';
 import { urlApi } from '../../utils/apiUrl/apiUrl';
+import { loading } from '../../components/loading/loading';
 
 
 
@@ -73,6 +74,7 @@ export const eventForm = async () => {
         const inputDate = document.getElementById("inputeEventDate").value;
         const locationInput = document.getElementById("locationInput").value;
         const inputDescription = document.getElementById("inputDescription").value;
+
         submitEvent(
                 inputEvent, 
                 inputDate, 
@@ -94,7 +96,12 @@ const submitEvent = async (eventName, date, location, img, description, category
        //si falta el nombre, la fecha, la localización...etc
        if (!eventName || !date || !location || !img || !description || !category) {
         errorWarning(form, "faltan campos por rellenar", "#054444")
-        console.log("faltan campos")
+        setTimeout(() => {
+            const existingMessage = document.getElementById("statusMessage");
+            if (existingMessage) {
+                form.removeChild(existingMessage);
+            }
+        }, 2000);
         return;
         } 
 
@@ -112,6 +119,7 @@ const submitEvent = async (eventName, date, location, img, description, category
     const token = localStorage.getItem("token"); 
     console.log(creator, "id del creador")
 
+
     const fetchOptions = {
         method: "POST",
         body: finalObject,
@@ -121,7 +129,12 @@ const submitEvent = async (eventName, date, location, img, description, category
         }
     }
 
+       
+    const container = document.getElementById('enterEventForm');
+    loading(container);
+
     try {
+
         const res = await fetch(`${urlApi}/api/new-event`, fetchOptions);
         const respuestaFinal = await res.json();
         console.log(respuestaFinal)
@@ -137,6 +150,8 @@ const submitEvent = async (eventName, date, location, img, description, category
         
     } catch (error) {
         console.error("Error al enviar la solicitud:", error);
+    } finally {
+        removeLoader()
     }
     
 }
