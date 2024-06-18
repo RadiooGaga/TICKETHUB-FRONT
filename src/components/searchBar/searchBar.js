@@ -1,4 +1,5 @@
 import { printEvents } from "../../pages/home/home";
+import { urlApi } from "../../utils/apiUrl/apiUrl";
 import './searchBar.css';
   
 export const createSearchBar = () => {  
@@ -50,7 +51,7 @@ const searchInfo = (data) => {
 
     if (busqueda.length > 2) {
     
-        fetch(`http://localhost:3004/api/events/search/${busqueda}`)
+        fetch(`${urlApi}/api/events/search/${busqueda}`)
             .then(response => {
                 if (!response.ok) {
                     console.log(response);

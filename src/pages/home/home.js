@@ -190,7 +190,6 @@ export const printDetails = (event, div) => {
       //BOTÓN PARA MOSTRAR ASISTENTES
       counter.addEventListener('click', async (e) => {
         const ulDisplay = document.querySelector('#counterDiv');
-        console.log(ulDisplay, "donde está la listaaa")
     
         if ((ulDisplay.style.display === "none" || ulDisplay.style.display === "") && user.rol === "admin") {
           try { 
@@ -235,8 +234,6 @@ export const printDetails = (event, div) => {
       //BOTÓN PARA BORRAR EVENTO
       deleteEventButton.addEventListener('click', (e) => {
         const texto =  "¿SEGURO QUE DESEA ELIMINAR EL EVENTO?";
-        const container = document.getElementById('divYesNoButtons')
-        loading(container);
         warning(divCardEvent, deleteEvent, event, texto)
       })
       

@@ -51,53 +51,53 @@ ENDPOINTS:GET
 
 Registro y login de usuario + registro de participante sin cuenta
 
-- **URL:** `http://localhost:3004/api/auth/login`
-- **URL:** `http://localhost:3004/api/auth/register`
-- **URL:** `http://localhost:3004/api/participant/register`
+- **URL:** `${urlApi}/api/auth/login`
+- **URL:** `${urlApi}/api/auth/register`
+- **URL:** `${urlApi}/api/participant/register`
 
 Crear evento.
 
-- **URL:** `http://localhost:3004/api/new-event`
+- **URL:** `${urlApi}/api/new-event`
 
 Barra de búsqueda.
 
-- **URL:** `http://localhost:3004/api/events/search/jungle`
+- **URL:** `${urlApi}/api/events/search/jungle`
 
 Traer el evento del creador.
 
-- **URL** `http://localhost:3004/api/event/creator/id`
+- **URL** `${urlApi}/api/event/creator/id`
 
 Traer eventos por categoría.
 
-- **URL** `http://localhost:3004/api/events/category/conciertos`
+- **URL** `${urlApi}/api/events/category/conciertos`
 
 Eventos por su ID
 
-- **URL** `http://localhost:3004/api/events/id`
+- **URL** `${urlApi}/api/events/id`
 
 Todos los eventos
 
-- **URL** `http://localhost:3004/api/events`
+- **URL** `${urlApi}/api/events`
 
 Todos los usuarios
 
-- **URL** `http://localhost:3004/api/users`
+- **URL** `${urlApi}/api/users`
 
 Usuarios por id
 
-- **URL** `http://localhost:3004/api/user/id`
+- **URL** `${urlApi}/api/user/id`
 
 Todos los participantes
 
-- **URL** `http://localhost:3004/api/participants`
+- **URL** `${urlApi}/api/participants`
 
 Participantes por id
 
-- **URL** `http://localhost:3004/api/participant/id`
+- **URL** `${urlApi}/api/participant/id`
 
 Participantes por su evento
 
-- **URL** `http://localhost:3004/api/participants/event/eventId`
+- **URL** `${urlApi}/api/participants/event/eventId`
 
 ----------------------------------------------------------.
 
@@ -105,11 +105,11 @@ ENDPOINTS:PUT
 
 Actualizar usuario
 
-- **URL** `http://localhost:3004/api/user/update-user/userId`
+- **URL** `${urlApi}/api/user/update-user/userId`
 
 Actualizar evento
 
-- **URL** `http://localhost:3004/api/update-event/eventId`
+- **URL** `${urlApi}/api/update-event/eventId`
 
 ------------------------------------------------------------.
 
@@ -117,11 +117,11 @@ ENDPOINTS:DELETE
 
 Borrar usuario
 
-- **URL** `http://localhost:3004/api/user/delete-user/userId`
+- **URL** `${urlApi}/api/user/delete-user/userId`
 
 Borrar evento
 
-- **URL** `http://localhost:3004/api/delete-event/eventId`
+- **URL** `${urlApi}/api/delete-event/eventId`
 
 --------------------------------------------------------------.
 
